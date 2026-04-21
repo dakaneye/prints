@@ -9,7 +9,7 @@ requires-python = ">=3.11,<3.14"
 # Also what you install locally if you want to run `pytest` from the repo root.
 dev = [
     "build123d>=0.10.0",
-    "pytest>=7",
+    "pytest>=9.0.3",
 ]
 
 [tool.pytest.ini_options]
