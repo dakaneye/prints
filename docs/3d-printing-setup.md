@@ -59,8 +59,22 @@ re-exporting STL each time.
 
 ## CI
 
-Lint runs in CI via `dakaneye/hookshot`'s `python-ci.yml` reusable workflow.
-The caller in `.github/workflows/ci.yml` is generated automatically by the
-`~/dev/personal/.github` sync engine. There are no unit tests for
-`build123d` scripts — the check is "does `python base.py` produce a valid
-STL in the viewer?", done locally.
+Lint + tests run in CI via `dakaneye/hookshot`'s `python-ci.yml` reusable
+workflow. The caller in `.github/workflows/ci.yml` is generated
+automatically by the `~/dev/personal/.github` sync engine.
+
+**Tests** live under `tests/` at the repo root. They run each project's
+generator script and assert it produces a valid, non-trivial STL — catching
+build123d API drift, import breakage, and geometry regressions. To run
+locally:
+
+```bash
+# From repo root
+python3.13 -m venv .venv
+.venv/bin/pip install -e ".[dev]"
+.venv/bin/pytest
+```
+
+The root `.venv` is separate from the per-project `3d/.venv` — the root one
+holds `build123d + pytest` for running tests; the project one holds just
+`build123d` for authoring parts. Both are gitignored.
