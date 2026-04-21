@@ -1,4 +1,4 @@
-# Design: `misc-3d-printing-projects` + Wizard Figurine for Wallace (v1)
+# Design: `prints` + Wizard Figurine for Wallace (v1)
 
 **Date:** 2026-04-21
 **Author:** Sam (with Claude)
@@ -8,7 +8,7 @@
 
 Two nested goals:
 
-1. **Establish `misc-3d-printing-projects`** — a public GitHub repo that holds small, one-off 3D printing projects. Hybrid model: each project folder can mix downloaded third-party STLs (for organic shapes like figurines) with parametric `build123d` scripts (for custom / personalized parts).
+1. **Establish `prints`** — a public GitHub repo that holds small, one-off 3D printing projects. Hybrid model: each project folder can mix downloaded third-party STLs (for organic shapes like figurines) with parametric `build123d` scripts (for custom / personalized parts).
 
 2. **First project: a wizard-themed figurine for Sam's nephew Wallace (age 8)** — a downloaded figurine paired with a custom build123d display base engraved with his name. First real print on Sam's newly-arrived Bambu Lab A1. The project is deliberately framed as a teaching moment — both for Wallace (how 3D printing works, how downloaded vs. coded parts coexist) and for Sam (first-time A1 workflow validation).
 
@@ -31,12 +31,12 @@ This spec **extends that convention one level up**: each project is a self-conta
 
 ## Scope (v1)
 
-### Repository: `~/dev/personal/misc-3d-printing-projects/`
+### Repository: `~/dev/personal/prints/`
 
 Public GitHub repo. Top-level layout:
 
 ```
-misc-3d-printing-projects/
+prints/
 ├── README.md                   # What this repo is, index of projects, printer basics
 ├── CONTRIBUTING.md             # "Personal hobby repo. PRs not expected. Fork freely."
 ├── LICENSE                     # MIT
@@ -167,4 +167,4 @@ Four deliberate "show Wallace" moments this project sets up. These belong in the
 ## Related work
 
 - `~/dev/personal/word-clock-for-my-daughters/enclosure/3d/` — the canonical build123d-per-project pattern this spec extends
-- `~/dev/personal/word-clock-for-my-daughters/docs/hardware/3d-printing-setup.md` (referenced from within that project) — Bambu Studio + A1 onboarding notes, should be linked from `misc-3d-printing-projects/docs/3d-printing-setup.md`
+- `~/dev/personal/word-clock-for-my-daughters/docs/hardware/3d-printing-setup.md` (referenced from within that project) — Bambu Studio + A1 onboarding notes, should be linked from `prints/docs/3d-printing-setup.md`

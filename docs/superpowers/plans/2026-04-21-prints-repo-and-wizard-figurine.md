@@ -1,4 +1,4 @@
-# `misc-3d-printing-projects` Repo + Wizard Figurine (Wallace) Implementation Plan
+# `prints` Repo + Wizard Figurine (Wallace) Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -123,7 +123,7 @@ This file serves double duty: it's the ecosystem marker that tells the sync engi
 
 ```toml
 [project]
-name = "misc-3d-printing-projects"
+name = "prints"
 version = "0.0.0"
 description = "Miscellaneous 3D printing projects — Bambu Lab A1 + build123d"
 requires-python = ">=3.11"
@@ -177,7 +177,7 @@ git commit -m "chore: add pyproject with ruff config"
 - [ ] **Step 1: Create `README.md`**
 
 ```markdown
-# misc-3d-printing-projects
+# prints
 
 Small, one-off 3D printing projects for my Bambu Lab A1.
 
@@ -189,7 +189,7 @@ downloaded model paired with a custom accent part I coded.
 ## Repository layout
 
 ```
-misc-3d-printing-projects/
+prints/
 ├── docs/
 │   ├── 3d-printing-setup.md    # Bambu A1 + Bambu Studio workflow
 │   └── superpowers/            # Design docs + implementation plans
@@ -409,7 +409,7 @@ git commit -m "docs: add 3d printing setup guide"
 - [ ] **Step 1: Create the project folder**
 
 ```bash
-mkdir -p ~/dev/personal/misc-3d-printing-projects/projects/wizard-figurine-for-wallace/3d
+mkdir -p ~/dev/personal/prints/projects/wizard-figurine-for-wallace/3d
 ```
 
 - [ ] **Step 2: Create `projects/wizard-figurine-for-wallace/README.md`** (IP-neutral, with teaching beats)
@@ -586,7 +586,7 @@ git commit -m "feat: add build123d requirements"
 - [ ] **Step 1: Set up the `.venv` and install build123d**
 
 ```bash
-cd ~/dev/personal/misc-3d-printing-projects/projects/wizard-figurine-for-wallace/3d
+cd ~/dev/personal/prints/projects/wizard-figurine-for-wallace/3d
 python3 -m venv .venv
 .venv/bin/pip install --upgrade pip
 .venv/bin/pip install -r requirements.txt
@@ -686,7 +686,7 @@ sketch/plane context depending on version. Expect 0–2 iterations first run.
 - [ ] **Step 3: Run `base.py`**
 
 ```bash
-cd ~/dev/personal/misc-3d-printing-projects/projects/wizard-figurine-for-wallace/3d
+cd ~/dev/personal/prints/projects/wizard-figurine-for-wallace/3d
 .venv/bin/python base.py
 ```
 
@@ -768,7 +768,7 @@ git commit -m "feat: parametric engraved base + build_all"
 - [ ] **Step 1: Run ruff check**
 
 ```bash
-cd ~/dev/personal/misc-3d-printing-projects
+cd ~/dev/personal/prints
 ruff check .
 ```
 Expected: exit 0. If it complains, fix and add a `style: ruff cleanup` commit.
@@ -797,7 +797,7 @@ Expected: "nothing to commit, working tree clean"
 - [ ] **Step 1: Nuke the venv + out dir**
 
 ```bash
-cd ~/dev/personal/misc-3d-printing-projects/projects/wizard-figurine-for-wallace/3d
+cd ~/dev/personal/prints/projects/wizard-figurine-for-wallace/3d
 rm -rf .venv out
 ```
 
@@ -830,7 +830,7 @@ Expected: clean — `out/` and `.venv/` both gitignored.
 - [ ] **Step 1: Run `gitleaks` one last time on the full history**
 
 ```bash
-cd ~/dev/personal/misc-3d-printing-projects
+cd ~/dev/personal/prints
 gitleaks detect --source . --verbose
 ```
 Expected: `no leaks found`. If any leak is flagged, **stop** — do not push.
@@ -839,7 +839,7 @@ Rewrite history to remove the leak and rotate the secret.
 - [ ] **Step 2: Create the repo under `dakaneye/` and push**
 
 ```bash
-gh repo create misc-3d-printing-projects \
+gh repo create prints \
   --public \
   --source=. \
   --remote=origin \
@@ -848,7 +848,7 @@ git push -u origin main
 ```
 
 Expected:
-- Repo created at `dakaneye/misc-3d-printing-projects`, public
+- Repo created at `dakaneye/prints`, public
 - `main` branch pushed with all local commits
 
 - [ ] **Step 3: Verify on GitHub**
@@ -881,14 +881,14 @@ gh run watch --repo dakaneye/.github
 ```
 
 Expected: workflow completes successfully. It will:
-- Detect `misc-3d-printing-projects` as Python (pyproject.toml present)
+- Detect `prints` as Python (pyproject.toml present)
 - Apply `repo-sync-baseline` ruleset via API
-- Open a PR against `dakaneye/misc-3d-printing-projects` titled something like "repo-sync: update baseline files" adding community health files + CI caller + Dependabot config + seed workflows
+- Open a PR against `dakaneye/prints` titled something like "repo-sync: update baseline files" adding community health files + CI caller + Dependabot config + seed workflows
 
 - [ ] **Step 3: Verify the sync PR exists**
 
 ```bash
-gh pr list --repo dakaneye/misc-3d-printing-projects
+gh pr list --repo dakaneye/prints
 ```
 
 Expected: one open PR from the sync bot on branch `repo-sync/settings`.
@@ -902,7 +902,7 @@ Expected: one open PR from the sync bot on branch `repo-sync/settings`.
 - [ ] **Step 1: Inspect what sync is adding**
 
 ```bash
-gh pr view --repo dakaneye/misc-3d-printing-projects --web
+gh pr view --repo dakaneye/prints --web
 ```
 Expected: PR adds `.github/ISSUE_TEMPLATE/*`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, `LICENSE` (MIT), `.github/workflows/ci.yml` (hookshot caller for `python-ci.yml`), `.github/dependabot.yml`, `.github/workflows/codeql.yml`, `.github/workflows/scan.yml`, `.github/workflows/dependabot-auto-merge.yml`.
 
@@ -912,20 +912,20 @@ the enforced/dynamic list.
 - [ ] **Step 2: Wait for PR checks to complete**
 
 ```bash
-gh pr checks --repo dakaneye/misc-3d-printing-projects --watch
+gh pr checks --repo dakaneye/prints --watch
 ```
 Expected: CI (python-ci via hookshot) runs on the PR and passes. The newly-added ci.yml runs ruff check + format check on the PR's merged state.
 
 - [ ] **Step 3: Merge the PR**
 
 ```bash
-gh pr merge --repo dakaneye/misc-3d-printing-projects --squash --delete-branch
+gh pr merge --repo dakaneye/prints --squash --delete-branch
 ```
 
 - [ ] **Step 4: Pull merged changes locally**
 
 ```bash
-cd ~/dev/personal/misc-3d-printing-projects
+cd ~/dev/personal/prints
 git pull --rebase origin main
 ```
 
@@ -942,21 +942,21 @@ Sanity-check that the public repo is in the "ready" state per `public-repo-setup
 - [ ] **Step 1: CI green on main**
 
 ```bash
-gh run list --repo dakaneye/misc-3d-printing-projects --workflow=ci.yml --limit 1
+gh run list --repo dakaneye/prints --workflow=ci.yml --limit 1
 ```
 Expected: most recent run `conclusion: success`.
 
 - [ ] **Step 2: CodeQL green on main**
 
 ```bash
-gh run list --repo dakaneye/misc-3d-printing-projects --workflow=codeql.yml --limit 1
+gh run list --repo dakaneye/prints --workflow=codeql.yml --limit 1
 ```
 Expected: most recent run `conclusion: success` (or in-progress; it's triggered by push so may still be running).
 
 - [ ] **Step 3: Dependabot alerts = 0**
 
 ```bash
-gh api "repos/dakaneye/misc-3d-printing-projects/dependabot/alerts" --jq 'length'
+gh api "repos/dakaneye/prints/dependabot/alerts" --jq 'length'
 ```
 Expected: `0`.
 
@@ -970,7 +970,7 @@ Expected: empty (nothing unpinned except `dakaneye/hookshot/...@v1` which is pin
 - [ ] **Step 5: Branch protection ruleset exists**
 
 ```bash
-gh api "repos/dakaneye/misc-3d-printing-projects/rulesets" --jq '.[].name'
+gh api "repos/dakaneye/prints/rulesets" --jq '.[].name'
 ```
 Expected: output includes `repo-sync-baseline`.
 

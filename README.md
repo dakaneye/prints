@@ -1,4 +1,4 @@
-# misc-3d-printing-projects
+# prints
 
 Small, one-off 3D printing projects for my Bambu Lab A1.
 
@@ -10,7 +10,7 @@ downloaded model paired with a custom accent part I coded.
 ## Repository layout
 
 ```
-misc-3d-printing-projects/
+prints/
 ├── docs/
 │   ├── 3d-printing-setup.md    # Bambu A1 + Bambu Studio workflow
 │   └── superpowers/            # Design docs + implementation plans

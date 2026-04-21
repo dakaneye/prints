@@ -1,5 +1,5 @@
 [project]
-name = "misc-3d-printing-projects"
+name = "prints"
 version = "0.0.0"
 description = "Miscellaneous 3D printing projects — Bambu Lab A1 + build123d"
 requires-python = ">=3.11,<3.14"
