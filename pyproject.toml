@@ -4,6 +4,17 @@ version = "0.0.0"
 description = "Miscellaneous 3D printing projects — Bambu Lab A1 + build123d"
 requires-python = ">=3.11,<3.14"
 
+[project.optional-dependencies]
+# Installed by hookshot's python-ci.yml via `pip install -e ".[dev]"` for CI.
+# Also what you install locally if you want to run `pytest` from the repo root.
+dev = [
+    "build123d>=0.10.0",
+    "pytest>=7",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
 [tool.ruff]
 line-length = 100
 target-version = "py311"
