@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.Python
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# build123d / 3D output
+out/
+*.stl
+*.3mf.backup
+
+# Third-party downloaded models — NEVER commit STL/3MF bytes (IP + license compliance)
+projects/*/downloaded/*
+# ...except the provenance placeholder + SOURCES index
+!projects/*/downloaded/.gitkeep
+!projects/*/downloaded/SOURCES.md
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Secrets
+.env
+.env.local
+*.key
+*.pem
