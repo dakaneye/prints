@@ -28,9 +28,15 @@ Each project's `3d/` directory is self-contained:
 
 ```bash
 cd projects/<project>/3d
-python3 -m venv .venv
+python3.13 -m venv .venv   # build123d caps at Python 3.13 — don't use 3.14+
 .venv/bin/pip install --upgrade pip -r requirements.txt
 ```
+
+**Python version note:** `build123d >=0.10.0` requires Python `>=3.10,<3.14`.
+Homebrew's default `python3` on this Mac is currently 3.14, which pip will
+refuse. Use `python3.13` explicitly (available via Nix / pyenv / uv). If
+`which python3.13` fails, install one — e.g., `brew install python@3.13` or
+`uv python install 3.13`.
 
 (`.venv/` is gitignored — it's ~500 MB of cached OpenCascade CAD geometry,
 rebuild locally on demand.)

@@ -54,7 +54,7 @@ name_text = Text(RECIPIENT_NAME, font_size=NAME_FONT_SIZE)
 name_3d = extrude(name_text, amount=ENGRAVE_DEPTH)
 name_3d = Pos(0, -BASE_DEPTH * 0.25, BASE_HEIGHT - ENGRAVE_DEPTH) * name_3d
 
-# Date engraving — below the name
+# Date engraving — in front of the name (more-negative Y, closer to the front edge)
 date_text = Text(PRINT_DATE, font_size=DATE_FONT_SIZE)
 date_3d = extrude(date_text, amount=ENGRAVE_DEPTH)
 date_3d = Pos(0, -BASE_DEPTH * 0.40, BASE_HEIGHT - ENGRAVE_DEPTH) * date_3d
