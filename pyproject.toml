@@ -1,0 +1,21 @@
+[project]
+name = "misc-3d-printing-projects"
+version = "0.0.0"
+description = "Miscellaneous 3D printing projects — Bambu Lab A1 + build123d"
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+# Exclude gitignored build artifacts + venvs; ruff won't see them anyway but
+# being explicit helps if someone runs it against a dirty tree.
+extend-exclude = [".venv", "out", "projects/*/downloaded"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+# build123d is used as `from build123d import *` in scripts — the star-import
+# warnings (F403, F405) are noise for that pattern.
+ignore = ["F403", "F405"]
+
+[tool.ruff.format]
+quote-style = "double"
