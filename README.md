@@ -31,6 +31,8 @@ prints/
 |---|---|---|
 | `wizard-figurine-for-wallace` | in progress | Wizard-themed figurine with a personalized engraved oak display base |
 | `wowza-keychain` | in progress | Stackable coin keychain with raised "Wowza" text — student rewards |
+| `spiral-fidget-hexagonal` | queued | Print-in-place spring fidget — desk toy |
+| `infinite-cube` | queued | Sculptural display cube with internal voids — desk piece |
 
 ## Printer + filament
 
