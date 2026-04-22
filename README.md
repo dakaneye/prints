@@ -33,6 +33,8 @@ prints/
 | `wowza-keychain` | in progress | Stackable coin keychain with raised "Wowza" text — student rewards |
 | `spiral-fidget-hexagonal` | queued | Print-in-place spring fidget — desk toy |
 | `infinite-cube` | queued | Sculptural display cube with internal voids — desk piece |
+| `fibonacci-sphere-ball` | queued | Airless Fibonacci-lattice ball — toddler play |
+| `icosahedron-toy` | queued | 65 mm sculpted icosahedron — toddler tactile toy |
 
 ## Printer + filament
 
