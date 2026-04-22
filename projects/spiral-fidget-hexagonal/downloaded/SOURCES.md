@@ -1,20 +1,16 @@
 # Downloaded STL sources
 
-One entry per downloaded file. Fill in when a file is added to this folder.
-
 **STL/3MF/step files themselves are gitignored** — only this SOURCES.md
 gets committed. Do not re-host third-party models.
 
 ---
 
-<!-- Template:
+## `obj_1_Outside hexagonal spinner.stl` + `obj_2_Insert fdgsdfgsdfg.stl`
 
-## `<filename>.stl`
-
-- **URL:** <https link to MakerWorld / Printables / Thingiverse page>
-- **Author:** <author's display name>
-- **License:** <e.g., CC-BY-SA-4.0, MIT, Standard Digital File License>
-- **Downloaded:** YYYY-MM-DD
-- **Notes:** <scale adjustments, orientation, support settings, etc.>
-
--->
+- **URL:** <https://makerworld.com/en/models/550623-spiral-helix-fidget-toy-v4-hexagonal>
+- **Author:** CrownWalker
+- **License:** see MakerWorld page (verify before remixing or redistributing)
+- **Downloaded:** 2026-04-21
+- **Notes:** Two-part assembly — outer hexagonal shell (46 × 40 × 66 mm)
+  + insert (37 × 37 × 72 mm). Insert filename has the author's placeholder
+  text ("fdgsdfgsdfg"); harmless, can rename locally if you like.

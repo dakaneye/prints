@@ -1,20 +1,16 @@
 # Downloaded STL sources
 
-One entry per downloaded file. Fill in when a file is added to this folder.
-
 **STL/3MF/step files themselves are gitignored** — only this SOURCES.md
 gets committed. Do not re-host third-party models.
 
 ---
 
-<!-- Template:
+## `Infinite cube.stl`
 
-## `<filename>.stl`
-
-- **URL:** <https link to MakerWorld / Printables / Thingiverse page>
-- **Author:** <author's display name>
-- **License:** <e.g., CC-BY-SA-4.0, MIT, Standard Digital File License>
-- **Downloaded:** YYYY-MM-DD
-- **Notes:** <scale adjustments, orientation, support settings, etc.>
-
--->
+- **URL:** <https://makerworld.com/en/models/909738-infinite-cube>
+- **Author:** fifindr
+- **License:** see MakerWorld page (verify before remixing or redistributing)
+- **Downloaded:** 2026-04-21
+- **Notes:** 111 × 111 × 111 mm sculptural cube with internal voids.
+  Single body, watertight. Needs supports — rotate 45° on the bed to
+  cut support waste by ~26 g and ~50 min print time.
