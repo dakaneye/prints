@@ -33,6 +33,9 @@ PRINT_DATE = "APR 2026"
 # the plaque's top layer.
 ENGRAVE_DEPTH = 1.2
 
+# Pinned for cross-platform reproducibility (CI is Linux, dev is macOS).
+FONT = "Arial Rounded MT Bold"
+
 NAME_FONT_SIZE = 10.0
 DATE_FONT_SIZE = 5.0
 
@@ -50,12 +53,12 @@ BOTTOM = (Align.CENTER, Align.CENTER, Align.MIN)
 plaque = Box(BASE_WIDTH, BASE_DEPTH, BASE_HEIGHT, align=BOTTOM)
 
 # Name engraving — front half of the plaque (negative Y)
-name_text = Text(RECIPIENT_NAME, font_size=NAME_FONT_SIZE)
+name_text = Text(RECIPIENT_NAME, font_size=NAME_FONT_SIZE, font=FONT)
 name_3d = extrude(name_text, amount=ENGRAVE_DEPTH)
 name_3d = Pos(0, -BASE_DEPTH * 0.25, BASE_HEIGHT - ENGRAVE_DEPTH) * name_3d
 
 # Date engraving — in front of the name (more-negative Y, closer to the front edge)
-date_text = Text(PRINT_DATE, font_size=DATE_FONT_SIZE)
+date_text = Text(PRINT_DATE, font_size=DATE_FONT_SIZE, font=FONT)
 date_3d = extrude(date_text, amount=ENGRAVE_DEPTH)
 date_3d = Pos(0, -BASE_DEPTH * 0.40, BASE_HEIGHT - ENGRAVE_DEPTH) * date_3d
 
