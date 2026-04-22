@@ -30,6 +30,7 @@ prints/
 | Project | Status | Description |
 |---|---|---|
 | `wizard-figurine-for-wallace` | in progress | Wizard-themed figurine with a personalized engraved oak display base |
+| `wowza-keychain` | in progress | Stackable coin keychain with raised "Wowza" text — student rewards |
 
 ## Printer + filament
 

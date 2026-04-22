@@ -31,6 +31,9 @@ projects/*/downloaded/*
 *.swp
 *.swo
 
+# Superpowers brainstorming sessions (mockups + state)
+.superpowers/
+
 # Secrets
 .env
 .env.local
