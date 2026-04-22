@@ -53,7 +53,7 @@ CAD geometry — rebuild locally on demand, never commit.
 .venv/bin/pytest
 
 # Run a single test
-.venv/bin/pytest tests/test_wizard_figurine_base.py::test_base_produces_valid_stl
+.venv/bin/pytest tests/test_wizard_figurine_base.py::test_script_produces_valid_stl
 
 # Lint (matches CI)
 ruff check .

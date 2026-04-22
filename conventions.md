@@ -40,8 +40,9 @@ Every script in any `3d/` directory follows these three sections:
 
 ```python
 """Explain the part in plain English."""
-from build123d import *
 from pathlib import Path
+
+from build123d import Align, Box, export_stl  # explicit; whatever the part needs
 
 # ─── Parameters ──
 # All dimensions in mm. Source of numbers in comments.
