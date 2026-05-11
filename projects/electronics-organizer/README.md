@@ -128,15 +128,19 @@ Suggested print sequence:
 
 ## Lid label contrast
 
-The lid engraving is 0.6 mm recessed by default. Three contrast options:
+The lid labels are **raised 0.6 mm** relief, not recessed (see
+`conventions.md` — recessed text bridges poorly in PLA). Contrast comes
+from shadow and surface relief; readability is good in indirect light.
 
-- **As-printed (no extra effort):** readable in indirect light. Acceptable.
-- **Sharpie paint-fill (recommended):** print, run a black/silver Sharpie
-  over the recessed letters, wipe excess off the surface with a paper
-  towel. ~2 minutes per lid. High contrast. No filament swap.
-- **Two-tone via filament swap (v2):** in Bambu Studio, add a manual
-  filament-change `M600` at the engraving Z height (top 0.6 mm). Print
-  body in grey, swap to white for the engraving layer. ~5 min interruption.
+If you want higher contrast:
+
+- **Two-tone via filament swap:** in Bambu Studio, add a manual
+  filament-change `M600` at the layer where the raised text begins
+  (lid top face = 8.0 mm from bed). Print body in grey, swap to white
+  for the raised-label layers (top 0.6 mm). ~5 min interruption mid-print.
+
+(Sharpie paint-fill doesn't work on raised features — it was an option for
+the earlier recessed design but doesn't apply here.)
 
 ## Tweaking
 

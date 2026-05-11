@@ -66,15 +66,14 @@ LID_OVERLAP = 6.0  # how far the lid skirt comes down over the tote outer wall
 LID_CLEARANCE = 0.30  # XY gap between tote outer wall and lid inner wall (per side)
 LID_TOP_THICKNESS = 2.4
 
-# Engraving
-ENGRAVE_DEPTH = 0.6
+# Labels (raised relief — recessed text bridges poorly in PLA; see conventions.md)
+LABEL_RELIEF = 0.6  # height of raised text/triangle above lid top
 LABEL_FONT = "Arial"  # Bold via FontStyle.BOLD; Liberation Sans on Linux/CI
 HEADER_TEXT = "ELECTRONICS"
 HEADER_CAP_HEIGHT = 9.0
 LABEL_CAP_BIN_1x1 = 4.0
 LABEL_CAP_BIN_1x2 = 5.0
 LABEL_CAP_WELL = 7.0
-PERIMETER_LINE_WIDTH = 0.5
 
 
 # ─── Geometry ──
@@ -91,12 +90,10 @@ except ImportError as exc:
 from build123d import (  # noqa: E402
     Align,
     Box,
-    Circle,
     Cylinder,
     FontStyle,
     Polygon,
     Pos,
-    Rectangle,
     Text,
     export_stl,
     extrude,
@@ -249,10 +246,12 @@ lid -= Box(
 )
 
 
-# ── Engrave the lid map ──
+# ── Raised labels on the lid map ──
+# Raised (not recessed) per conventions.md print-readiness rules — recessed
+# text bridges poorly in PLA when the engraved face prints down.
 
 
-def _engrave_text(s: str, cap_height: float, x: float, y: float):
+def _raised_text(s: str, cap_height: float, x: float, y: float):
     sketch = Pos(x, y, 0) * Text(
         s,
         font_size=cap_height,
@@ -260,23 +259,7 @@ def _engrave_text(s: str, cap_height: float, x: float, y: float):
         font_style=FontStyle.BOLD,
         align=(Align.CENTER, Align.CENTER),
     )
-    return Pos(0, 0, LID_TOP_Z) * extrude(sketch, amount=-ENGRAVE_DEPTH)
-
-
-def _engrave_rect_outline(w: float, d: float, x: float, y: float):
-    outer = Pos(x, y, 0) * Rectangle(w, d, align=(Align.CENTER, Align.CENTER))
-    inner = Pos(x, y, 0) * Rectangle(
-        w - 2 * PERIMETER_LINE_WIDTH,
-        d - 2 * PERIMETER_LINE_WIDTH,
-        align=(Align.CENTER, Align.CENTER),
-    )
-    return Pos(0, 0, LID_TOP_Z) * extrude(outer - inner, amount=-ENGRAVE_DEPTH)
-
-
-def _engrave_circle_outline(diameter: float, x: float, y: float):
-    outer = Pos(x, y, 0) * Circle(radius=diameter / 2)
-    inner = Pos(x, y, 0) * Circle(radius=diameter / 2 - PERIMETER_LINE_WIDTH)
-    return Pos(0, 0, LID_TOP_Z) * extrude(outer - inner, amount=-ENGRAVE_DEPTH)
+    return Pos(0, 0, LID_TOP_Z) * extrude(sketch, amount=LABEL_RELIEF)
 
 
 def _interior_to_lid(x: float, y: float) -> tuple[float, float]:
@@ -286,26 +269,22 @@ def _interior_to_lid(x: float, y: float) -> tuple[float, float]:
 
 # Header along the back edge of the lid
 header_y = INT_D / 2 - HEADER_CAP_HEIGHT - 4.0
-lid -= _engrave_text(HEADER_TEXT, HEADER_CAP_HEIGHT, 0.0, header_y)
+lid += _raised_text(HEADER_TEXT, HEADER_CAP_HEIGHT, 0.0, header_y)
 
-# Subcase wells and reel — outline + label
+# Subcase wells and reel labels
 for name, kind, args in COMPARTMENTS:
     if kind == "well":
         if name == "CAPS":
             cx, cy = _interior_to_lid(CAP_CX, CAP_CY)
-            ow, od = CAP_W, CAP_D
         elif name == "HEADERS":
             cx, cy = _interior_to_lid(HDR_CX, HDR_CY)
-            ow, od = HDR_W, HDR_D
         else:
             continue
-        lid -= _engrave_rect_outline(ow, od, cx, cy)
-        lid -= _engrave_text(name, LABEL_CAP_WELL, cx, cy)
+        lid += _raised_text(name, LABEL_CAP_WELL, cx, cy)
     elif kind == "reel":
         if name == "LEDS":
             cx, cy = _interior_to_lid(LED_CX, LED_CY)
-            lid -= _engrave_circle_outline(LED_DIA, cx, cy)
-            lid -= _engrave_text(name, LABEL_CAP_WELL, cx, cy)
+            lid += _raised_text(name, LABEL_CAP_WELL, cx, cy)
 
 
 # Bins on the 3×3 grid. (col, row, w_cells, h_cells) — col 0 = left, row 0 = front.
@@ -327,20 +306,18 @@ for name, kind, args in COMPARTMENTS:
     cell_cy = (row + hc / 2) * CELL_PITCH
     cx, cy = _interior_to_lid(cell_cx, cell_cy)
     cap_h = LABEL_CAP_BIN_1x2 if (wc * hc > 1) else LABEL_CAP_BIN_1x1
-    lid -= _engrave_rect_outline(wc * CELL_PITCH, hc * CELL_PITCH, cx, cy)
-    lid -= _engrave_text(name, cap_h, cx, cy)
+    lid += _raised_text(name, cap_h, cx, cy)
 
 
-# Orientation marker — small triangle at front-left corner of the lid map,
-# matching one on the tote rim (added below).
-def _front_left_triangle():
+# Orientation marker — small raised triangle at front-left corner of the lid.
+def _raised_triangle():
     fx, fy = _interior_to_lid(8.0, 8.0)
     pts = [(fx - 4, fy + 4), (fx + 4, fy + 4), (fx, fy - 4)]
     tri = Polygon(*pts, align=None)
-    return Pos(0, 0, LID_TOP_Z) * extrude(tri, amount=-ENGRAVE_DEPTH)
+    return Pos(0, 0, LID_TOP_Z) * extrude(tri, amount=LABEL_RELIEF)
 
 
-lid -= _front_left_triangle()
+lid += _raised_triangle()
 
 
 # ─── Export ──
@@ -358,4 +335,4 @@ lid_kb = lid_path.stat().st_size // 1024
 print(f"Wrote {tote_path.name} ({tote_kb} KB)")
 print(f"Wrote {lid_path.name} ({lid_kb} KB)")
 print(f"Tote outer: {OUT_W:.1f} × {OUT_D:.1f} × {OUT_H:.1f} mm")
-print(f"Lid outer:  {LID_OUTER_W:.1f} × {LID_OUTER_D:.1f} × {LID_H:.1f} mm")
+print(f"Lid outer:  {LID_OUTER_W:.1f} × {LID_OUTER_D:.1f} × {LID_H + LABEL_RELIEF:.1f} mm (incl. raised labels)")

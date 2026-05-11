@@ -21,8 +21,9 @@ Read these two files first; they're the source of truth for anything
 structural:
 
 - `conventions.md` — folder layout, naming, filament catalog, build123d
-  script three-section convention (Parameters / Geometry / Export), IP
-  posture
+  script three-section convention (Parameters / Geometry / Export),
+  print-readiness rules (raised labels, pre-print orientation review),
+  IP posture
 - `docs/3d-printing-setup.md` — hardware, slicer workflow, Python/venv
   setup, CI wiring
 
