@@ -1,0 +1,4 @@
+build123d>=0.10.0
+# Package name is `gridfinity`; repo name differs. PyPI 0.8.0 caps at <3.13,
+# so we install from git main where the upper bound was removed.
+gridfinity @ git+https://github.com/moritzmhmk/gridfinity-build123d
