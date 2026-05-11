@@ -1,8 +1,14 @@
 # Electronics organizer
 
+> **v1 status: failed.** The v1 STLs were printed and don't fit the items
+> they were designed for. See `print-log.md` for the post-mortem. Bins
+> are usable for loose components; the tote + lid are not usable as-is.
+> A v2 will likely pivot to a community-published Gridfinity case rather
+> than another custom build123d pass.
+
 A portable parts case for the word-clock Phase 2 BOM and its multipack
-spares. Friction-fit lid with an engraved layout map on top — the case
-identifies its own contents at a glance when closed.
+spares. Friction-fit lid with a layout map on top — the case identifies
+its own contents at a glance when closed.
 
 Three internal zones:
 
