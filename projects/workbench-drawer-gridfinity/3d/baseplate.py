@@ -1,10 +1,12 @@
 """Gridfinity baseplate tiles for the workbench rolling-cabinet drawers.
 
 Mirrors `desk-drawer-gridfinity/3d/baseplate.py` — emits one STL per
-tile in TILES. Drawer dimensions are still TBD, so the default is a
-single 6 x 4 tile: the largest single tile that fits the Bambu A1's
-256 mm bed comfortably, and a fit-check before committing to a full
-drawer's worth of plates.
+unique tile in TILES. All three Craftsman cabinet drawers share a
+13 x 9 cell grid (interior ~565-580 W x 410 D mm). Each drawer is
+split into 6 tiles in a 3 x 2 layout (widths 5+4+4 cells, heights
+5+4 cells), giving 4 unique tile shapes and 18 tiles total across
+the three drawers. Largest tile (5x5) is 209.5 mm — fits the A1's
+256 mm bed with margin.
 
 `gridfinity-build123d` only generates bin geometry, so the baseplate is
 built here: a flat slab with `gf.Base(grid)` subtracted from it. The

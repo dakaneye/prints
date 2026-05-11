@@ -57,7 +57,7 @@ manually to **SUNLU PLA+ 2.0**.
 
 Per-tile estimate: ~50 g filament, ~3-4 hrs print time.
 
-## First print: one Core tile (gate before printing 30)
+## First print: one Core tile (gate before printing 36)
 
 Print one Core tile and load-test before committing to bulk print:
 
@@ -80,5 +80,5 @@ Same flow as the other projects:
 3. Profile: `0.20mm Standard @BBL A1`. Bump infill to 25%, walls to 4.
 4. Slice → preview → print.
 
-For bulk print: import once, Right-click → Set quantity → 30, Auto
-Arrange Plate. Each plate fits ~2 tiles; ~15 plates over the bulk run.
+For bulk print: import once, Right-click → Set quantity → 36, Auto
+Arrange Plate. Each plate fits ~2 tiles; ~18 plates over the bulk run.
