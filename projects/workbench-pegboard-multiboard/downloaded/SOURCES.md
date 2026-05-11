@@ -8,19 +8,27 @@ template at the bottom matches the format used elsewhere in this repo.
 
 ---
 
-## Multiboard Core tile (planned ~30 copies)
+## Multiboard Core tile
 
-- **URL:** <https://multiboard.io> — official source. Fetch the Core
-  tile STL from Hands-On Tools' MakerWorld page, link to be added on
-  first download.
+- **URL:** <https://multibuild.io/parts>
 - **Author:** Hands-On Tools (Keegan)
-- **License:** Confirm from MakerWorld page at download time
-- **Downloaded:** YYYY-MM-DD (fill in)
+- **License:** Confirm from the source page at download time
+- **Downloaded:** 2026-05-11
 - **Tile size:** 200 mm flat-to-flat hex
-- **Print quantity:** ~30 for full pegboard coverage (confirm after
-  measuring pegboard dimensions)
-- **Notes:** Print with 4 walls, 25% infill — load-bearing tile, not
-  the baseplate default
+- **Print quantity:** 36 (full pegboard coverage — see math below)
+- **Notes:** 4 walls, 25% infill, no supports, no brim. Note: official
+  site has been renamed (originally Multiboard.io → now Multibuild.io);
+  the system name "Multiboard" is retained in this doc for consistency
+  with the rest of the project.
+
+### Pegboard coverage math
+
+- Pegboard visible: 1300 × 1100 mm
+- Tile flat-to-flat: 200 mm
+- Honeycomb stagger row pitch: ~173 mm (200 × √3/2)
+- Tiles per row: floor(1300 / 200) = 6
+- Rows: floor(1100 / 173) = 6
+- Total tiles: 6 × 6 = 36
 
 ## Multiconnect ↔ Gridfinity adapter (optional, 4-8 copies)
 
@@ -58,7 +66,8 @@ Recommended starting set — search MakerWorld for "Multiboard <tool>":
 - **Author:** <name or handle>
 - **License:** <CC-BY / CC0 / etc>
 - **Downloaded:** YYYY-MM-DD
-- **Purpose:** <which tool/zone>
+- **Purpose:** <which tool / zone>
+- **Tile size or bin size:** <e.g., 200 mm hex / 2x2x6U>
 - **Print qty:** <N>
 - **Notes:** <any tweaks needed in slicer>
 

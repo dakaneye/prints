@@ -11,17 +11,17 @@ adapters.
 
 | Dimension | Value | Status |
 |---|---|---|
-| Visible width (panel behind cabinet) | TBD mm | **MEASURE** |
-| Visible height | TBD mm | **MEASURE** |
-| Stud spacing behind pegboard | ~406 mm (16" OC, US framing) | Confirm by tapping |
-| Pegboard thickness | TBD mm (likely 3-6 mm hardboard) | Measure with calipers |
+| Visible width (panel behind cabinet) | 1300 mm (~51") | Measured |
+| Visible height | 1100 mm (~43") | Measured |
+| Stud spacing behind pegboard | 406 mm (16" OC) | Standard US framing |
+| Pegboard thickness | ~6 mm (1/4") | Standard hardboard |
 
 ## Tile coverage plan
 
 Core tile footprint: 200 × 200 mm hex (point-to-point ~230 mm, flat-to-flat 200 mm).
-A 1100 × 1200 mm pegboard fits roughly 5 tiles wide × 6 tiles tall in
-honeycomb stagger — call it ~30 tiles. Update once dimensions are
-measured.
+Pegboard area is 1300 × 1100 mm. Tile fit: 6 tiles wide × 6 rows tall in
+honeycomb stagger (row pitch ~173 mm) = **36 tiles for full coverage**.
+See `downloaded/SOURCES.md` for the coverage math.
 
 ## Mount strategy
 
@@ -41,8 +41,6 @@ land on tiles with at least one stud-mount screw.
 
 - `downloaded/SOURCES.md` — Multiboard Core tile + accessory STL provenance
 - `print-log.md` — per-print diary
-- `3d/` — *reserved for future custom accessories* (not present yet —
-  the standard tile and most tool holders are downloaded, not parametric)
 
 ## Print recipe
 
