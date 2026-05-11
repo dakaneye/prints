@@ -8,27 +8,36 @@ template at the bottom matches the format used elsewhere in this repo.
 
 ---
 
-## Multiboard Core tile
+## `8x8 MU - MultiBoard Octagon Plate.stl`
 
 - **URL:** <https://multibuild.io/parts>
 - **Author:** Hands-On Tools (Keegan)
 - **License:** Confirm from the source page at download time
 - **Downloaded:** 2026-05-11
-- **Tile size:** 200 mm flat-to-flat hex
-- **Print quantity:** 36 (full pegboard coverage — see math below)
-- **Notes:** 4 walls, 25% infill, no supports, no brim. Note: official
-  site has been renamed (originally Multiboard.io → now Multibuild.io);
-  the system name "Multiboard" is retained in this doc for consistency
-  with the rest of the project.
+- **Tile size:** 8 × 8 Multiboard Units = 200 × 200 mm bounding box,
+  octagonal outline, 6.2 mm thick
+- **Print quantity:** 30 (full pegboard coverage — see math below)
+- **Notes:** 4 walls, 25% infill, no supports, no brim. ~35 g per tile
+  at these settings. Note: official site has been renamed (originally
+  Multiboard.io → now Multibuild.io); the system name "Multiboard"
+  is retained in this doc for consistency with the rest of the project.
 
 ### Pegboard coverage math
 
+Multiboard tiles are octagonal (not hex). Edge-to-edge they form a
+truncated square tiling (4.8.8): octagons in a regular grid, with
+small square gaps at the 4-corner intersections.
+
 - Pegboard visible: 1300 × 1100 mm
-- Tile flat-to-flat: 200 mm
-- Honeycomb stagger row pitch: ~173 mm (200 × √3/2)
+- Octagon plate: 200 × 200 mm bounding box, 200 mm pitch
 - Tiles per row: floor(1300 / 200) = 6
-- Rows: floor(1100 / 173) = 6
-- Total tiles: 6 × 6 = 36
+- Rows: floor(1100 / 200) = 5
+- Total octagons: 6 × 5 = 30 (covers 1200 × 1000 mm with ~50-100 mm
+  border slack on each axis)
+- Corner-square fillers (optional, separate STL not yet downloaded):
+  (6−1) × (5−1) = 20 small square tiles to fill the corner gaps if
+  full visual coverage is desired. Without them, pegboard shows
+  through the corner gaps — most common look.
 
 ## Multiconnect ↔ Gridfinity adapter (optional, 4-8 copies)
 
@@ -67,7 +76,7 @@ Recommended starting set — search MakerWorld for "Multiboard <tool>":
 - **License:** <CC-BY / CC0 / etc>
 - **Downloaded:** YYYY-MM-DD
 - **Purpose:** <which tool / zone>
-- **Tile size or bin size:** <e.g., 200 mm hex / 2x2x6U>
+- **Tile size or bin size:** <e.g., 8x8 MU octagon / 2x2x6U>
 - **Print qty:** <N>
 - **Notes:** <any tweaks needed in slicer>
 

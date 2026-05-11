@@ -2,10 +2,13 @@
 
 Tiled Multiboard wall mounted on top of the existing 1/4" pegboard
 behind the garage workbench rolling cabinet. Multiboard is Hands-On
-Tools' hex-tiled wall storage system — each 200 × 200 mm Core tile
-mounts via 4 screw holes, accepts Multiconnect-standard accessories
-(hooks, shelves, holders), and bridges to Gridfinity bins via official
-adapters.
+Tools' octagon-tiled wall storage system — each 200 × 200 mm Core
+plate (octagonal outline inside a 200 mm square bounding box) mounts
+via screws, accepts Multiconnect-standard accessories (hooks, shelves,
+holders), and bridges to Gridfinity bins via official adapters. Tiles
+combine in a truncated square tiling (4.8.8) — octagons edge-to-edge
+with small square gaps at the 4-corner intersections (those gaps can
+optionally be filled with separate square-filler tiles).
 
 ## Pegboard dimensions
 
@@ -18,10 +21,12 @@ adapters.
 
 ## Tile coverage plan
 
-Core tile footprint: 200 × 200 mm hex (point-to-point ~230 mm, flat-to-flat 200 mm).
-Pegboard area is 1300 × 1100 mm. Tile fit: 6 tiles wide × 6 rows tall in
-honeycomb stagger (row pitch ~173 mm) = **36 tiles for full coverage**.
-See `downloaded/SOURCES.md` for the coverage math.
+Core plate footprint: 200 × 200 mm bounding box (octagonal outline),
+200 mm pitch in both X and Y. Pegboard area is 1300 × 1100 mm. Tile fit:
+6 tiles wide × 5 rows tall = **30 octagon plates** for primary coverage
+(spans 1200 × 1000 mm with ~50–100 mm border slack). 20 optional
+square-filler tiles can plug the 4-corner gaps if you want a fully
+solid surface. See `downloaded/SOURCES.md` for the coverage math.
 
 ## Mount strategy
 
@@ -52,12 +57,14 @@ manually to **SUNLU PLA+ 2.0**.
 | Layer height | 0.2 mm |
 | Walls | 4 (tiles bear weight; thicker walls = stiffer) |
 | Infill | 25% gyroid (denser than drawer baseplates — load-bearing) |
-| Supports | None (hex tiles are designed support-free) |
+| Supports | None (tiles are designed support-free) |
 | Brim | None (textured PEI) |
 
-Per-tile estimate: ~50 g filament, ~3-4 hrs print time.
+Per-tile estimate: ~35 g filament, ~3 hrs print time (verified against
+the actual `8x8 MU - MultiBoard Octagon Plate.stl` at 25% infill /
+4 walls — STL is 71 cm³ raw volume).
 
-## First print: one Core tile (gate before printing 36)
+## First print: one Core tile (gate before printing 30)
 
 Print one Core tile and load-test before committing to bulk print:
 
@@ -80,5 +87,5 @@ Same flow as the other projects:
 3. Profile: `0.20mm Standard @BBL A1`. Bump infill to 25%, walls to 4.
 4. Slice → preview → print.
 
-For bulk print: import once, Right-click → Set quantity → 36, Auto
-Arrange Plate. Each plate fits ~2 tiles; ~18 plates over the bulk run.
+For bulk print: import once, Right-click → Set quantity → 30, Auto
+Arrange Plate. Each plate fits ~2 tiles; ~15 plates over the bulk run.
