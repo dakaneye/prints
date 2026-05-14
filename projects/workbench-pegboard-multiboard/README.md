@@ -30,17 +30,40 @@ solid surface. See `downloaded/SOURCES.md` for the coverage math.
 
 ## Mount strategy
 
-Two-tier screw plan:
+3D-printed pegboard adapters (no drilling). The
+[Pegboard Mount for Multiboard](https://makerworld.com/en/models/519109-pegboard-mount-for-multiboard)
+remix publishes 4 adapter types that snap into standard 1/4" pegboard
+holes and provide MultiPoint nodes for Multiboard tiles to snap onto.
+Load passes from accessory → tile → adapter → pegboard hole →
+pegboard's existing stud-screws → wall.
 
-1. **Primary load path:** where a Multiboard mount hole aligns with both
-   a pegboard hole AND a wall stud → #8 × 2" wood screw through tile +
-   pegboard into stud. Rated 50+ lbs per tile properly mounted.
-2. **Pegboard-only fallback:** where no stud aligns → #8 × 3/4" wood
-   screw with washer through tile + pegboard only. Rated 5-10 lbs per
-   screw — acceptable for light-tool zones, not heavy zones.
+The 4 adapter types and where each goes on a tile grid:
 
-Plan tile placement so heavy items (DeWalt corded drill, bar clamps)
-land on tiles with at least one stud-mount screw.
+| Adapter | Where it installs | Count for 6 × 5 grid |
+|---|---|---|
+| **Single Peg** | Each of the 4 outer corners of the entire grid | 4 |
+| **Double Vertical** | Left and right edges — joins 2 vertically-stacked tiles | 8 (4 per side) |
+| **Double Horizontal** | Top and bottom edges — joins 2 side-by-side tiles | 10 (5 per edge) |
+| **Quad Peg** | Interior 4-way intersections where 4 tiles meet | 20 (5 × 4) |
+| **Total** | | **42 adapters** |
+
+Total adapter filament: ~267 g (¼ of a spool). Print recipe: standard
+0.20 mm A1 profile, 3 walls, 25 % infill, no supports. Each adapter
+prints in 30-70 min; small enough to pack 6-10 per plate.
+
+**Pegboard manufacturing variance:** the creator notes their pegboard
+had a ¼" drift at column 16 that opened a small gap between tiles 2
+and 3. For a 1300 mm wide installation (~51"), measure hole-to-hole
+spacing in three places before locking the layout — cumulative drift
+of 1 mm/foot can compound across 6 tiles. If drift is found, plan tile
+placement so the gap falls between tiles you don't care about, or
+shift adapter pegs to engage cleaner holes.
+
+**Fallback for unexpectedly heavy zones:** if a single tile ends up
+overloaded (>20 lbs of tools on one tile), you can drill a
+supplemental #8 × 2" wood screw through tile + adapter + pegboard into
+a stud at that location. Unlikely to be needed given typical
+workbench loads (DeWalt corded drill ~5 lbs, bar clamps 1-2 lbs each).
 
 ## Files
 
