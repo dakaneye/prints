@@ -12,20 +12,29 @@ and baseplate is sized in 42 × 42 mm cells with 7 mm height units
 ## Drawers
 
 The Craftsman cabinet has three drawers of identical width / depth
-footprint and varying interior height (the top drawer is shallow for
-small bits, the bottom drawer is deep for cases and chargers).
+footprint and varying interior height. The **top drawer has a fixed
+divider 11" (~279 mm) from the left wall** — it cannot be removed, so
+that drawer is laid out as two independent compartments. Middle and
+bottom drawers are open (no divider) and use a continuous grid.
 
-| Drawer | Width | Depth | Interior height | Cells (W × D) | Status |
+| Drawer | Width | Depth | Interior height | Layout | Status |
 |---|---|---|---|---|---|
-| Top    | 580 mm (~22.8") | 410 mm (~16.1") | 50 mm (~2") | 13 × 9 | STLs ready |
-| Middle | 565 mm (~22.2") | 410 mm | 70 mm (~2.75") | 13 × 9 | STLs ready |
-| Bottom | 565 mm | 410 mm | 150 mm (~5.9") | 13 × 9 | STLs ready |
+| Top    | 580 mm (~22.8") | 410 mm (~16.1") | 50 mm (~2") | 2 × (6 × 9) compartments (fixed divider @ 279 mm) | STLs ready |
+| Middle | 565 mm (~22.2") | 410 mm | 70 mm (~2.75") | 13 × 9 continuous | STLs ready |
+| Bottom | 565 mm | 410 mm | 150 mm (~5.9") | 13 × 9 continuous | STLs ready |
 
-All three drawers share the same 13 × 9 cell grid (the 15 mm width difference
-between top and middle/bottom is absorbed by the 4 mm clearance inset). Each
-drawer is split into 6 tiles in a 3 × 2 layout (widths 5 + 4 + 4 cells,
-heights 5 + 4 cells). Across all three drawers: 4 unique tile STLs, 18 tiles
-to print total.
+**Top drawer (divider-split):** each compartment is ~6 × 9 cells. A 6 × 9
+won't print as one tile (9 rows = 378 mm > A1 bed), so each compartment
+splits into a **6 × 5 + 6 × 4** pair. Top drawer total: 2 × 6×5 + 2 × 6×4.
+Width slack: ~27 mm in the left compartment, ~44 mm in the right — see the
+filler note below.
+
+**Middle + bottom drawers (continuous):** 13 × 9 grid, split 5+4+4 cols ×
+5+4 rows into 1× 5×5 + 1× 5×4 + 2× 4×5 + 2× 4×4 per drawer (5×4 and 4×5
+are the same STL rotated 90°).
+
+**16 tiles total** across the three drawers: 2× 6×5, 2× 6×4, 2× 5×5,
+6× 5×4 (covers the 4×5 positions rotated), 4× 4×4.
 
 Bin height ceiling by drawer:
 - Top (50 mm interior): max bin height 6U (42 mm) — leaves room for the
