@@ -42,6 +42,60 @@ Bin height ceiling by drawer:
 - Middle (70 mm): max 9U (63 mm)
 - Bottom (150 mm): max 18U (126 mm); 12U (84 mm) is the practical default
 
+## Per-drawer tile placement
+
+Looking down into each open drawer. Keep "front" vs "back" consistent
+across drawers so bins stay interchangeable (Gridfinity is symmetric, so
+which depth band is front is arbitrary — just pick one and keep it).
+
+### Top drawer — fixed divider at ~279 mm from left
+
+Two independent compartments, each 6 × 9 cells, each split into a
+6×5 (back, 5-deep) + 6×4 (front, 4-deep):
+
+```
+        LEFT compartment        │ divider │      RIGHT compartment
+        (~279 mm, 6 cols)       │ (fixed) │      (~296 mm, 6 cols)
+      ┌────────────────────┐    │         │    ┌────────────────────┐
+back  │       6 × 5        │    │         │    │       6 × 5        │
+      ├────────────────────┤    │         │    ├────────────────────┤
+front │       6 × 4        │    │         │    │       6 × 4        │
+      └────────────────────┘    │         │    └────────────────────┘
+   ~27 mm width slack on the         ~44 mm width slack on the
+   left edge of this compartment     right edge of this compartment
+```
+
+Top drawer = 2× `baseplate_6x5.stl` + 2× `baseplate_6x4.stl`.
+
+### Middle + bottom drawers — continuous 13 × 9
+
+13 cols = 5+4+4, 9 rows = 5+4. The two `4×5` positions use the
+`baseplate_5x4.stl` STL rotated 90°.
+
+```
+            cols 0–4      cols 5–8     cols 9–12
+            (5 wide)      (4 wide)     (4 wide)
+          ┌────────────┬────────────┬────────────┐
+back      │            │            │            │
+(rows0–4, │    5×5     │    4×5     │    4×5     │
+ 5 deep)  │            │            │            │
+          ├────────────┼────────────┼────────────┤
+front     │    5×4     │    4×4     │    4×4     │
+(rows5–8, │            │            │            │
+ 4 deep)  │            │            │            │
+          └────────────┴────────────┴────────────┘
+```
+
+Each of the middle and bottom drawers =
+1× `baseplate_5x5.stl` + 1× `baseplate_5x4.stl` +
+2× `baseplate_5x4.stl` (rotated 90° for the 4×5 slots) +
+2× `baseplate_4x4.stl`.
+
+Push tiles into the back-left corner; perimeter slack
+(~19–34 mm width, ~32 mm depth) pools on the front + right. Optional
+filler strips can take up that slack — a filler generator will be
+added to `3d/` once the actual gaps are measured.
+
 ## Items being organized (rough)
 
 From the drawer photos as of 2026-05-11:
