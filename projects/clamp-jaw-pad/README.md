@@ -27,13 +27,14 @@ fix, out of scope here).
 
 ## Geometry summary
 
-- Outer body: 38.67 mm (slide) × 27 mm (across) × 10 mm (thick),
+- Outer body: 38.67 mm (slide) × 26 mm (across) × 11.5 mm (thick),
   stadium-rounded short ends
 - Channel: 21 mm wide × 4 mm tall slot; closed end is rounded
   concentric with the outer D so the back stays solid
 - Lips: 4 mm thick, overhang 2.0 mm (one edge) / 3.7 mm (other)
-- Walls: constant 3.0 mm solid wrap around the D and along the sides
-  (`(OUTER_WIDTH − CHANNEL_WIDTH) / 2`); 2.0 mm back wall behind the channel
+- Walls: constant 2.5 mm solid wrap around the D and along the sides
+  (`(OUTER_WIDTH − CHANNEL_WIDTH) / 2`); 3.5 mm contact plate between
+  the channel floor and the workpiece face
 
 ## Files
 

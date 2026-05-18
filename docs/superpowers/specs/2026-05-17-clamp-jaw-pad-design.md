@@ -44,16 +44,16 @@ Slide-on **end cap** with a C cross-section:
 | Param | Value | Meaning |
 |---|---|---|
 | `OUTER_LENGTH` | 38.67 | Slide axis, closed end → mouth |
-| `OUTER_WIDTH` | 27.0 | Across the lips |
-| `OUTER_THICKNESS` | 10.0 | Back wall 2 + channel 4 + lip 4 |
+| `OUTER_WIDTH` | 26.0 | Across the lips (= `CHANNEL_WIDTH` + 2 × 2.5 wrap) |
+| `OUTER_THICKNESS` | 11.5 | Back wall 3.5 + channel 4 + lip 4 |
 | `CHANNEL_WIDTH` | 21.0 | Jaw plate width |
 | `CHANNEL_HEIGHT` | 4.0 | Slot the jaw sits in (jaw thickness) |
-| `BACK_WALL` | 2.0 | Solid plate behind the channel |
+| `BACK_WALL` | 3.5 | Solid plate between channel floor and workpiece face |
 | `LIP_THICKNESS` | 4.0 | Z thickness of each retaining lip |
 | `LIP_OVERHANG_A` | 2.0 | One lip's inward reach over the channel |
 | `LIP_OVERHANG_B` | 3.7 | Other lip's inward reach |
 | `MOUTH_OVERSHOOT` | 2.0 | Pocket extends past the +X mouth for a clean opening |
-| `WRAP_WALL` | 3.0 | Derived `(OUTER_WIDTH − CHANNEL_WIDTH) / 2`; constant solid wall around the D and along the sides |
+| `WRAP_WALL` | 2.5 | Derived `(OUTER_WIDTH − CHANNEL_WIDTH) / 2`; constant solid wall around the D and along the sides |
 | `FIT_CLEARANCE` | 0.0 | Added to channel W/H for slide fit; tune after test print |
 
 Derived: the mouth opening between lips ≈ `CHANNEL_WIDTH` −
@@ -88,6 +88,13 @@ pocket; the rounded outer D tapers narrower than the 21 mm pocket near
 the back, so the pocket breached the shell and the back corners were
 hollow. Fixed by making the pocket a stadium with a closed end
 concentric to the outer D (constant `WRAP_WALL`).
+
+**Iteration note (2026-05-18, fit review):** D/side wrap of 3.0 mm read
+too thick and the 2.0 mm contact plate too thin under clamp load.
+`OUTER_WIDTH` 27→26 (wrap → 2.5 mm, matching the original
+21-channel/2.5-wall measurement); `BACK_WALL` 2.0→3.5 and
+`OUTER_THICKNESS` 10→11.5 (extra material added on the contact side
+only — channel and lip positions unchanged, still fits the jaw).
 
 ## Print orientation review (conventions §Print-readiness)
 

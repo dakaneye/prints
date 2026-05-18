@@ -18,13 +18,13 @@ from build123d import Align, Box, Pos, RectangleRounded, export_stl, extrude
 # Measured from the worn original; it currently fits the jaw, so it is
 # treated as ground truth.
 OUTER_LENGTH = 38.67  # slide axis: closed end → mouth
-OUTER_WIDTH = 27.0  # across the lips
-OUTER_THICKNESS = 10.0  # back-to-front: BACK_WALL + CHANNEL_HEIGHT + LIP_THICKNESS
+OUTER_WIDTH = 26.0  # across the lips (= CHANNEL_WIDTH + 2 × 2.5 wrap)
+OUTER_THICKNESS = 11.5  # back-to-front: BACK_WALL + CHANNEL_HEIGHT + LIP_THICKNESS
 
 CHANNEL_WIDTH = 21.0  # jaw plate width
 CHANNEL_HEIGHT = 4.0  # slot the jaw sits in (jaw thickness)
 
-BACK_WALL = 2.0  # solid plate behind the channel
+BACK_WALL = 3.5  # solid plate between channel floor and workpiece face
 LIP_THICKNESS = 4.0  # Z thickness of each retaining lip
 LIP_OVERHANG_A = 2.0  # +Y lip inward reach over the channel
 LIP_OVERHANG_B = 3.7  # -Y lip inward reach over the channel
@@ -32,7 +32,7 @@ MOUTH_OVERSHOOT = 2.0  # pocket extends past the +X mouth so it opens cleanly
 
 # The pocket's closed end is a semicircle concentric with the outer D.
 # Concentric circles give a constant solid wall everywhere around the
-# back and along the sides: (OUTER_WIDTH - CHANNEL_WIDTH) / 2 = 3.0 mm.
+# back and along the sides: (OUTER_WIDTH - CHANNEL_WIDTH) / 2 = 2.5 mm.
 # This is what fills the back corners that a rectangular pocket left open.
 WRAP_WALL = (OUTER_WIDTH - CHANNEL_WIDTH) / 2
 
