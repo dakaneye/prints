@@ -139,8 +139,24 @@ Follow `tests/test_breaker_panel_clip.py`:
   a non-trivial STL (> 5 KB).
 - `test_stl_geometry_invariants` — `trimesh` load: watertight, single
   body, bounding box within ±50 % of the nominal
-  38.67 × 27 × 10 mm so a regression (empty boolean, runaway dimension)
-  fails loudly.
+  38.67 × 26 × 11.5 mm so a regression (empty boolean, runaway
+  dimension) fails loudly.
+
+## Status — good enough, not yet 1:1 (2026-05-18)
+
+Accepted as functional and "good enough for now." It is **not** a
+dimensional 1:1 replacement for the original:
+
+- Thicker than the original (`OUTER_THICKNESS` 11.5 mm; the extra
+  `BACK_WALL` material was added deliberately for strength under clamp
+  load).
+- Sticks out from the clamp jaw farther than the original along the
+  slide axis.
+
+Future work to reach a true 1:1 replacement: measure the original's
+actual overall thickness and how far it seats onto the jaw, then trim
+`BACK_WALL` / `OUTER_LENGTH` to match (or split the difference between
+strength and an exact match). Deferred — current part is in use.
 
 ## Out of scope
 
