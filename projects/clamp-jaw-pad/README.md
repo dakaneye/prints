@@ -29,9 +29,11 @@ fix, out of scope here).
 
 - Outer body: 38.67 mm (slide) × 27 mm (across) × 10 mm (thick),
   stadium-rounded short ends
-- Channel: 21 mm wide × 4 mm tall slot, ~36.2 mm deep
+- Channel: 21 mm wide × 4 mm tall slot; closed end is rounded
+  concentric with the outer D so the back stays solid
 - Lips: 4 mm thick, overhang 2.0 mm (one edge) / 3.7 mm (other)
-- Walls: 2.5 mm sides, 2.0 mm back, 2.5 mm closed end
+- Walls: constant 3.0 mm solid wrap around the D and along the sides
+  (`(OUTER_WIDTH − CHANNEL_WIDTH) / 2`); 2.0 mm back wall behind the channel
 
 ## Files
 

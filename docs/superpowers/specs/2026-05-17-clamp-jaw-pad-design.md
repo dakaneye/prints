@@ -52,33 +52,42 @@ Slide-on **end cap** with a C cross-section:
 | `LIP_THICKNESS` | 4.0 | Z thickness of each retaining lip |
 | `LIP_OVERHANG_A` | 2.0 | One lip's inward reach over the channel |
 | `LIP_OVERHANG_B` | 3.7 | Other lip's inward reach |
-| `SIDE_WALL` | 2.5 | Each Y-edge wall (21 + 2.5 + 2.5 ≈ 27) |
-| `CLOSED_END_WALL` | 2.5 | Solid stop at the D end |
-| `END_RADIUS` | 13.5 | Stadium end fillet, = `OUTER_WIDTH` / 2 |
+| `MOUTH_OVERSHOOT` | 2.0 | Pocket extends past the +X mouth for a clean opening |
+| `WRAP_WALL` | 3.0 | Derived `(OUTER_WIDTH − CHANNEL_WIDTH) / 2`; constant solid wall around the D and along the sides |
 | `FIT_CLEARANCE` | 0.0 | Added to channel W/H for slide fit; tune after test print |
 
-Derived: pocket depth ≈ `OUTER_LENGTH` − `CLOSED_END_WALL` ≈ 36.2 mm.
-The mouth opening between lips ≈ `CHANNEL_WIDTH` − `LIP_OVERHANG_A`
-− `LIP_OVERHANG_B` ≈ 15.3 mm.
+Derived: the mouth opening between lips ≈ `CHANNEL_WIDTH` −
+`LIP_OVERHANG_A` − `LIP_OVERHANG_B` ≈ 15.3 mm. The jaw cavity runs
+under a solid front cap at the D end and opens to the front (between
+the lips) from the straight section to the mouth.
 
 ## Geometry construction (boolean method)
 
 Matches the existing `projects/breaker-panel-clip/3d/block.py` style.
 
 1. **Outer body**: a stadium-footprint prism — `OUTER_LENGTH` ×
-   `OUTER_WIDTH` × `OUTER_THICKNESS`, with the two short (X) ends
-   rounded to `END_RADIUS`.
-2. **Channel pocket**: a box `(CHANNEL_WIDTH + FIT_CLEARANCE)` ×
-   `(pocket depth)` × `(CHANNEL_HEIGHT + FIT_CLEARANCE)`, subtracted —
-   open at the +X mouth, stopping `CLOSED_END_WALL` short of the −X end,
-   floored by `BACK_WALL`, ceiled by the lips.
+   `OUTER_WIDTH` × `OUTER_THICKNESS`, short (X) ends rounded to
+   `OUTER_WIDTH / 2` via `RectangleRounded` extruded in Z.
+2. **Channel pocket**: a *stadium* `(CHANNEL_WIDTH + FIT_CLEARANCE)`
+   wide × `(CHANNEL_HEIGHT + FIT_CLEARANCE)` tall, subtracted. Its
+   closed end is a semicircle **concentric with the outer D**, leaving
+   a constant `WRAP_WALL` of solid all the way around the back — this
+   fills the back corners a rectangular pocket would breach. Floored by
+   `BACK_WALL`; sized so the open end overshoots the +X mouth by
+   `MOUTH_OVERSHOOT`.
 3. **Mouth window**: subtract the central opening on the +Z face
-   between the two lips (width = channel − overhangs), running the full
-   pocket length so the jaw's front face is exposed and the lips remain
-   only at the Y edges.
+   between the two lips (width = channel − overhangs), starting at the
+   straight section (the D-arc centre) so the rounded D end keeps a
+   solid front cap like the original, running out past the mouth.
 
 Asymmetry handled by offsetting the window in Y so one lip reads 2.0 mm
 and the other 3.7 mm.
+
+**Iteration note (2026-05-18):** the first render used a rectangular
+pocket; the rounded outer D tapers narrower than the 21 mm pocket near
+the back, so the pocket breached the shell and the back corners were
+hollow. Fixed by making the pocket a stadium with a closed end
+concentric to the outer D (constant `WRAP_WALL`).
 
 ## Print orientation review (conventions §Print-readiness)
 
