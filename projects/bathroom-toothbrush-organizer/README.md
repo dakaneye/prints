@@ -2,9 +2,9 @@
 
 A scalloped-wall family bathroom organizer. Holds 3 manual toothbrushes
 (1 adult + 2 kids) and a toothpaste tube in an open, draining wet zone, with
-a walled-off, covered q-tip cubby that stays dry. Pure parametric (build123d);
-the scalloped wall is styled after a q-tip holder the design borrows its look
-from. Design history: `docs/superpowers/specs/2026-06-07-bathroom-toothbrush-organizer-design.md`.
+a walled-off, covered q-tip cubby that stays dry. Pure parametric (build123d),
+with a concave vertically-scalloped outer wall. Design history:
+`docs/superpowers/specs/2026-06-07-bathroom-toothbrush-organizer-design.md`.
 
 ## Parts
 

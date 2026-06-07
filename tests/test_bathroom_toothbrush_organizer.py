@@ -76,4 +76,7 @@ def test_lid_geometry_invariants():
     # Cap Ø48, plug Ø~41, total height 9 mm. Smallest extent is the height.
     h, d1, d2 = sorted(mesh.extents)
     assert 7 < h < 12, f"Lid height out of range: {h:.1f} mm"
+    # Both in-plane extents are the round cap diameter (~48 mm); check both so a
+    # future ellipse/distortion regression is caught, not just one axis.
     assert 44 < d1 < 52, f"Lid diameter out of range: {d1:.1f} mm"
+    assert 44 < d2 < 52, f"Lid diameter out of range: {d2:.1f} mm"
