@@ -54,3 +54,26 @@ def test_body_geometry_invariants():
     assert 60 < x < 75, f"Depth extent out of range: {x:.1f} mm"
     assert 75 < y < 85, f"Height extent out of range: {y:.1f} mm"
     assert 155 < z < 170, f"Width extent out of range: {z:.1f} mm"
+
+
+def test_lid_script_exists():
+    assert LID_SCRIPT.is_file(), f"Missing generator: {LID_SCRIPT}"
+
+
+def test_lid_produces_valid_stl():
+    _run(LID_SCRIPT, LID_STL)
+    assert LID_STL.stat().st_size > 5_000, (
+        f"Lid STL suspiciously small ({LID_STL.stat().st_size} bytes) — geometry may be broken"
+    )
+
+
+def test_lid_geometry_invariants():
+    if not LID_STL.exists():
+        _run(LID_SCRIPT, LID_STL)
+    mesh = trimesh.load(str(LID_STL))
+    assert mesh.is_watertight, "Lid mesh is not watertight"
+    assert mesh.body_count == 1, f"Expected one connected body, got {mesh.body_count}"
+    # Cap Ø48, plug Ø~41, total height 9 mm. Smallest extent is the height.
+    h, d1, d2 = sorted(mesh.extents)
+    assert 7 < h < 12, f"Lid height out of range: {h:.1f} mm"
+    assert 44 < d1 < 52, f"Lid diameter out of range: {d1:.1f} mm"
