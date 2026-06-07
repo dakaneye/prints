@@ -34,3 +34,12 @@ def test_nut_produces_valid_stl():
     assert out.stat().st_size > 5_000, f"nut STL suspiciously small ({out.stat().st_size} bytes)"
     mesh = trimesh.load(str(out))
     assert mesh.is_watertight, "nut mesh not watertight — would not slice cleanly"
+
+
+def test_body_produces_valid_stl():
+    out = _run("body.py")
+    assert out.stat().st_size > 20_000, f"body STL suspiciously small ({out.stat().st_size} bytes)"
+    mesh = trimesh.load(str(out))
+    assert mesh.body_count == 1, f"body should be one connected solid, got {mesh.body_count}"
+    x, y, z = mesh.extents
+    assert max(mesh.extents) < 70, f"body unexpectedly large: {mesh.extents}"
