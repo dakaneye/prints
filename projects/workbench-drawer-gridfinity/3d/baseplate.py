@@ -37,8 +37,9 @@ from pathlib import Path
 # middle + bottom are continuous 13x9. 4x5 positions use the 5x4 STL
 # rotated 90 degrees, so 5x4 qty covers both orientations.
 TILES: list[tuple[int, int, int]] = [
-    (6, 5, 2),  # top drawer — one per compartment (left + right of divider)
-    (6, 4, 2),  # top drawer — one per compartment (left + right of divider)
+    (3, 5, 4),  # top drawer — back band split (6x5 too big for A1 bed edge zones);
+    # 2 tiles side-by-side per compartment × 2 compartments
+    (6, 4, 2),  # top drawer — front band, one per compartment
     (5, 5, 2),  # middle + bottom — left corner, 5-deep band
     (5, 4, 6),  # middle + bottom — left corner 4-deep + middle/right 5-deep (rotated)
     (4, 4, 4),  # middle + bottom — middle/right, 4-deep band

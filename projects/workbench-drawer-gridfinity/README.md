@@ -25,16 +25,21 @@ bottom drawers are open (no divider) and use a continuous grid.
 
 **Top drawer (divider-split):** each compartment is ~6 × 9 cells. A 6 × 9
 won't print as one tile (9 rows = 378 mm > A1 bed), so each compartment
-splits into a **6 × 5 + 6 × 4** pair. Top drawer total: 2 × 6×5 + 2 × 6×4.
-Width slack: ~27 mm in the left compartment, ~44 mm in the right — see the
-filler note below.
+splits depth-wise into a **back 5-deep band + front 4-deep band**. The
+back 5-deep band is further split width-wise into two **3 × 5** tiles
+because a single 6 × 5 (251.5 × 209.5 mm) sits right at the A1's edge
+exclusion zone and fails mid-print (confirmed by an overnight spaghetti).
+Per compartment: 2× 3×5 (back) + 1× 6×4 (front). Top drawer total:
+**4× 3×5 + 2× 6×4**. Width slack: ~27 mm in the left compartment,
+~44 mm in the right — see the filler note below.
 
 **Middle + bottom drawers (continuous):** 13 × 9 grid, split 5+4+4 cols ×
 5+4 rows into 1× 5×5 + 1× 5×4 + 2× 4×5 + 2× 4×4 per drawer (5×4 and 4×5
 are the same STL rotated 90°).
 
-**16 tiles total** across the three drawers: 2× 6×5, 2× 6×4, 2× 5×5,
-6× 5×4 (covers the 4×5 positions rotated), 4× 4×4.
+**18 tiles + 4 spacers total** across the three drawers: 4× 3×5,
+2× 6×4, 2× 5×5, 6× 5×4 (covers the 4×5 positions rotated), 4× 4×4;
+plus 2× `spacer_left` + 2× `spacer_right` (top drawer only).
 
 Bin height ceiling by drawer:
 - Top (50 mm interior): max bin height 6U (42 mm) — leaves room for the
@@ -50,22 +55,31 @@ which depth band is front is arbitrary — just pick one and keep it).
 
 ### Top drawer — fixed divider at ~279 mm from left
 
-Two independent compartments, each 6 × 9 cells, each split into a
-6×5 (back, 5-deep) + 6×4 (front, 4-deep):
+Two independent compartments, each 6 × 9 cells. Back band is split
+width-wise into two 3×5 tiles (A1 bed edge zones reject a single 6×5);
+front band is one 6×4:
 
 ```
         LEFT compartment        │ divider │      RIGHT compartment
         (~279 mm, 6 cols)       │ (fixed) │      (~296 mm, 6 cols)
-      ┌────────────────────┐    │         │    ┌────────────────────┐
-back  │       6 × 5        │    │         │    │       6 × 5        │
-      ├────────────────────┤    │         │    ├────────────────────┤
+      ┌─────────┬──────────┐    │         │    ┌─────────┬──────────┐
+back  │  3 × 5  │   3 × 5  │    │         │    │  3 × 5  │   3 × 5  │
+      ├─────────┴──────────┤    │         │    ├─────────┴──────────┤
 front │       6 × 4        │    │         │    │       6 × 4        │
       └────────────────────┘    │         │    └────────────────────┘
-   ~27 mm width slack on the         ~44 mm width slack on the
+   ~25 mm width slack on the         ~45 mm width slack on the
    left edge of this compartment     right edge of this compartment
+   (filled by spacer_left)            (filled by spacer_right)
 ```
 
-Top drawer = 2× `baseplate_6x5.stl` + 2× `baseplate_6x4.stl`.
+Top drawer = 4× `baseplate_3x5.stl` + 2× `baseplate_6x4.stl`
++ 2× `spacer_left_25x205.stl` + 2× `spacer_right_45x205.stl`.
+
+The spacers are flat 4.75 mm slabs that fill the perimeter slack so
+the tiles don't slide sideways in the drawer. Each side strip is
+split into two halves (~205 mm each) because the full 410 mm drawer
+depth exceeds A1's edge-safe build area. See `3d/spacer.py` to tune
+widths if your drawer measures differently.
 
 ### Middle + bottom drawers — continuous 13 × 9
 
@@ -134,12 +148,15 @@ filament — single-color across both systems).
 | Supports | None |
 | Brim | None (textured PEI) |
 
-A1 bed is 256 × 256 mm. Single-piece tiles cap at ~6 × 6 cells. The
-generator emits one STL per unique `(cols, rows)` in `TILES`.
+A1 bed is 256 × 256 mm nominally, but the edge exclusion zones (probe
++ carriage limits) reject tiles larger than ~5×5 cells in practice —
+a 6×5 (251.5 × 209.5 mm) failed mid-print with corner-lift / spaghetti.
+The generator emits one STL per unique `(cols, rows)` in `TILES`.
 
 ## Files
 
-- `3d/baseplate.py` — parametric baseplate tile generator (4 unique tile sizes, 18 tiles total across 3 drawers)
+- `3d/baseplate.py` — parametric baseplate tile generator (5 unique tile sizes, 18 tiles total across 3 drawers)
+- `3d/spacer.py` — flat perimeter spacers for top drawer (2 widths, 4 pieces)
 - `3d/bins.py` — generic empty bins (starter set empty until inventory is set)
 - `3d/build_all.py` — regenerates every part script
 - `3d/requirements.txt` — `build123d` + `gridfinity-build123d`
