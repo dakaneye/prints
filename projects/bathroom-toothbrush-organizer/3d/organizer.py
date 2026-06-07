@@ -47,7 +47,7 @@ BRUSH_X = (-55.0, -35.0, -15.0)  # three bores across the wet zone
 
 TP_W = 50.0  # toothpaste pocket size (X)
 TP_L = 26.0  # toothpaste pocket size (Y)
-TP_X = -35.0
+TP_X = -35.0  # toothpaste pocket center X
 TP_Y = -16.0  # front row, -Y of center
 
 QT_D = 42.0  # q-tip well diameter
