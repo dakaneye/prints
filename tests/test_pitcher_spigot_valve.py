@@ -43,3 +43,10 @@ def test_body_produces_valid_stl():
     assert mesh.body_count == 1, f"body should be one connected solid, got {mesh.body_count}"
     x, y, z = mesh.extents
     assert max(mesh.extents) < 70, f"body unexpectedly large: {mesh.extents}"
+
+
+def test_plug_produces_valid_stl():
+    out = _run("plug.py")
+    assert out.stat().st_size > 10_000, f"plug STL suspiciously small ({out.stat().st_size} bytes)"
+    mesh = trimesh.load(str(out))
+    assert mesh.body_count == 1, f"plug should be one connected solid, got {mesh.body_count}"
