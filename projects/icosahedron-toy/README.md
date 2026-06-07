@@ -13,7 +13,7 @@ See `downloaded/SOURCES.md` for the URL, author, and license.
 
 | Filament | Print time | Notes |
 |---|---|---|
-| SUNLU PLA+ 2.0 (white or oak wood) | ~2–3 h | Print on a flat face for best bottom finish; 0% infill is fine — the icosahedron's geometry is self-supporting and the empty interior makes it light. No supports. |
+| SUNLU PLA+ 2.0 (white or oak wood) | ~2–3 h | Use **File → Open Project** on `icosahedron.3mf` — it loads the creator's tuned orientation + slicer settings. Studio may warn about floating regions on this sculpted icosahedron — slice anyway and check the layer preview / filament estimate. Enable tree supports if the layer preview shows obvious unsupported overhangs. 0% infill is fine. |
 
 ## Files
 

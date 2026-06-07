@@ -12,5 +12,4 @@ gets committed. Do not re-host third-party models.
 - **License:** see MakerWorld page (verify before remixing or redistributing)
 - **Downloaded:** 2026-04-21
 - **Notes:** 111 × 111 × 111 mm sculptural cube with internal voids.
-  Single body, watertight. Needs supports — rotate 45° on the bed to
-  cut support waste by ~26 g and ~50 min print time.
+  Single body, watertight. Needs supports.
