@@ -11,5 +11,9 @@
   round; lid is the matching oval plug.
 - Wall has a smooth rim band top and bottom (`RIM_TOP` / `RIM_BOTTOM`); the
   flutes only run between them, for a finished lip above and below.
+- Reworked from a solid-with-pockets block into a thin-walled hollow shell to
+  cut a ~13 h print: 3 mm outer wall/floor, 2.4 mm socket walls, mostly-empty
+  interior split by a wet/dry divider. Material ~680 → ~285 cm³. Brush holes are
+  now thin free-standing sockets. Re-slice to confirm the new print time.
 - Verify before printing: caliper the actual manual brushes against the Ø16
   bores, and eyeball the reeding against the q-tip holder it's styled after.

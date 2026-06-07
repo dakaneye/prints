@@ -55,6 +55,12 @@ def test_body_geometry_invariants():
     assert 60 < depth < 78, f"Depth extent out of range: {depth:.1f} mm"
     assert 75 < height < 85, f"Height extent out of range: {height:.1f} mm"
     assert 180 < width < 200, f"Width extent out of range: {width:.1f} mm"
+    # Thin-walled hollow shell, not a solid block — this is what keeps the print
+    # time down. The solid-with-pockets version was ~680 cm³ of material; the
+    # shell is ~285. Guard against a regression that accidentally fills it in.
+    assert mesh.volume < 450_000, (
+        f"Body is not hollow — {mesh.volume / 1000:.0f} cm³ of material (expected < 450)"
+    )
 
 
 def test_lid_script_exists():
