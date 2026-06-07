@@ -1,30 +1,31 @@
-"""Lift-off lid for the organizer's q-tip well.
+"""Lift-off lid for the organizer's oval q-tip well.
 
-A plug-style cap: a flat disc that overhangs the well rim and rests on the
-body's top face, with a short downward plug that slips into the Ø42 well
+A plug-style cap: a flat oval disc that overhangs the well rim and rests on the
+body's top face, with a short downward oval plug that slips into the well
 (0.8 mm diametral clearance for a hand-fit). Keeps q-tips dry and clean.
 
 Print orientation: cap face down on the bed, plug pointing up — no overhang,
-no supports. Diameters here must track QT_D in organizer.py.
+no supports. The well radii here must track QT_RX / QT_RY in organizer.py.
 """
 
 from pathlib import Path
 
-from build123d import Align, Cylinder, Pos, export_stl
+from build123d import Ellipse, Pos, export_stl, extrude
 
 # ─── Parameters (mm) ──
-WELL_D = 42.0  # must match QT_D in organizer.py
-CLEARANCE = 0.8  # diametral gap so the plug hand-fits the well
+WELL_RX = 28.0  # must match QT_RX in organizer.py
+WELL_RY = 21.0  # must match QT_RY in organizer.py
+CLEARANCE = 0.8  # diametral gap so the plug hand-fits the well (0.4 per side)
 
-CAP_OVERHANG = 3.0  # cap radius beyond the well, rests on the body top
+CAP_OVERHANG = 3.0  # cap reach beyond the well, rests on the body top
 CAP_THICK = 3.0  # cap disc thickness
 PLUG_DEPTH = 6.0  # how far the plug reaches into the well
 
 # ─── Geometry ──
-BOTTOM = (Align.CENTER, Align.CENTER, Align.MIN)
-
-cap = Pos(0, 0, 0) * Cylinder(WELL_D / 2 + CAP_OVERHANG, CAP_THICK, align=BOTTOM)
-plug = Pos(0, 0, CAP_THICK) * Cylinder((WELL_D - CLEARANCE) / 2, PLUG_DEPTH, align=BOTTOM)
+cap = extrude(Ellipse(WELL_RX + CAP_OVERHANG, WELL_RY + CAP_OVERHANG), amount=CAP_THICK)
+plug = Pos(0, 0, CAP_THICK) * extrude(
+    Ellipse(WELL_RX - CLEARANCE / 2, WELL_RY - CLEARANCE / 2), amount=PLUG_DEPTH
+)
 part = cap + plug
 
 # ─── Export ──

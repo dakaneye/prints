@@ -154,3 +154,16 @@ generators (run the script, assert a non-trivial STL), matching the existing
   print is available.
 - Ø16 brush bores and the shared toothpaste pocket sizing assume standard manual
   brushes — verify with a caliper on the actual brushes before committing the size.
+
+## Revision — wall style and q-tip well (2026-06-07)
+
+After the first build, two changes from reference photos:
+
+- **Wall:** the "concave vertical scallops" were realized as deep semicircular
+  bites that met at sharp cusps and spiked at the corners. Replaced with **smooth
+  vertical reeding** — the perimeter is displaced by a sine of its arc length, so
+  ridges and grooves are rounded and ride cleanly around the corners. Wide pitch
+  (~7.5 mm), shallow depth (~0.55 mm); tunable via `FLUTE_PITCH` / `FLUTE_DEPTH`.
+- **Q-tip well:** widened from Ø42 round to a **56 × 42 oval** with its long axis
+  left-right; body width grew 165 → 188 mm to fit it. The lid became a matching
+  oval plug.

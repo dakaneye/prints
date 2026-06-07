@@ -49,11 +49,12 @@ def test_body_geometry_invariants():
     mesh = trimesh.load(str(BODY_STL))
     assert mesh.is_watertight, "Body mesh is not watertight — would not slice cleanly"
     assert mesh.body_count == 1, f"Expected one connected body, got {mesh.body_count}"
-    # Nominal outer bounds 165 (X) x 70 (Y) x 80 (Z); scallops trim X/Y a few mm.
-    x, y, z = sorted(mesh.extents)
-    assert 60 < x < 75, f"Depth extent out of range: {x:.1f} mm"
-    assert 75 < y < 85, f"Height extent out of range: {y:.1f} mm"
-    assert 155 < z < 170, f"Width extent out of range: {z:.1f} mm"
+    # Nominal outer bounds 188 (X) x 70 (Y) x 80 (Z); reeding adds ~0.5 mm of
+    # crest to the X/Y extents. Sorted: depth < height < width.
+    depth, height, width = sorted(mesh.extents)
+    assert 60 < depth < 78, f"Depth extent out of range: {depth:.1f} mm"
+    assert 75 < height < 85, f"Height extent out of range: {height:.1f} mm"
+    assert 180 < width < 200, f"Width extent out of range: {width:.1f} mm"
 
 
 def test_lid_script_exists():
@@ -73,10 +74,8 @@ def test_lid_geometry_invariants():
     mesh = trimesh.load(str(LID_STL))
     assert mesh.is_watertight, "Lid mesh is not watertight"
     assert mesh.body_count == 1, f"Expected one connected body, got {mesh.body_count}"
-    # Cap Ø48, plug Ø~41, total height 9 mm. Smallest extent is the height.
-    h, d1, d2 = sorted(mesh.extents)
-    assert 7 < h < 12, f"Lid height out of range: {h:.1f} mm"
-    # Both in-plane extents are the round cap diameter (~48 mm); check both so a
-    # future ellipse/distortion regression is caught, not just one axis.
-    assert 44 < d1 < 52, f"Lid diameter out of range: {d1:.1f} mm"
-    assert 44 < d2 < 52, f"Lid diameter out of range: {d2:.1f} mm"
+    # Oval cap 62 (X) x 48 (Y), total height 9 mm. Sorted: height < short < long.
+    height, short_axis, long_axis = sorted(mesh.extents)
+    assert 7 < height < 12, f"Lid height out of range: {height:.1f} mm"
+    assert 42 < short_axis < 54, f"Lid short axis out of range: {short_axis:.1f} mm"
+    assert 56 < long_axis < 68, f"Lid long axis out of range: {long_axis:.1f} mm"
