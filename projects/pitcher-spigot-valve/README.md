@@ -10,7 +10,7 @@ everything else is printed.
   seat, downward spout
 - `plug.py` — tapered plug with an L-shaped bore and a lever paddle
 - `nut.py` — clamp nut (matched thread, wide bearing face)
-- `retainer.py` — snap collar that holds the plug down
+- `retainer.py` — press-fit collar that holds the plug down
 
 ## Mount (glass wall — handle gently)
 
@@ -25,5 +25,5 @@ torque a nut against glass.
 - Body: barrel pointing up, spout supported. Plug: lever up.
 - Food-safe silicone grease on the plug taper before assembly.
 
-First print is a fit prototype — tune `PLUG_CLEAR` in `plug.py`/`body.py`
-until the plug turns smoothly and seats. Leak-test with water before use.
+First print is a fit prototype — tune `PLUG_CLEAR` in `plug.py` until the
+plug turns smoothly and seats. Leak-test with water before use.

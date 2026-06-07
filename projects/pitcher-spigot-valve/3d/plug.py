@@ -23,7 +23,10 @@ SEAT_BOT_R = 8.0
 SEAT_DEPTH = 18.0
 PLUG_CLEAR = 0.25  # radial clearance vs seat — TUNE on the prototype
 
-LBORE_R = 3.5  # L-channel radius
+# L-channel radius. Ø7, below the spec's nominal Ø10: a wider bore would
+# thin the plug wall at the narrow seat end below the fit guard's
+# SEAT_BOT_R − PLUG_CLEAR > LBORE_R + 0.8 rule. Trades some flow for wall.
+LBORE_R = 3.5
 LEVER_LEN = 30.0
 LEVER_WIDTH = 9.0
 LEVER_THK = 5.0
