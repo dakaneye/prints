@@ -335,4 +335,7 @@ lid_kb = lid_path.stat().st_size // 1024
 print(f"Wrote {tote_path.name} ({tote_kb} KB)")
 print(f"Wrote {lid_path.name} ({lid_kb} KB)")
 print(f"Tote outer: {OUT_W:.1f} × {OUT_D:.1f} × {OUT_H:.1f} mm")
-print(f"Lid outer:  {LID_OUTER_W:.1f} × {LID_OUTER_D:.1f} × {LID_H + LABEL_RELIEF:.1f} mm (incl. raised labels)")
+print(
+    f"Lid outer:  {LID_OUTER_W:.1f} × {LID_OUTER_D:.1f} × {LID_H + LABEL_RELIEF:.1f} mm"
+    " (incl. raised labels)"
+)

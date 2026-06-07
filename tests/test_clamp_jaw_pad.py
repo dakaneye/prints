@@ -21,8 +21,7 @@ def _run_generator() -> None:
         text=True,
     )
     assert result.returncode == 0, (
-        f"pad.py exited {result.returncode}\n"
-        f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+        f"pad.py exited {result.returncode}\nstdout:\n{result.stdout}\nstderr:\n{result.stderr}"
     )
     assert OUT_STL.is_file(), f"Expected {OUT_STL} after running pad.py"
 
