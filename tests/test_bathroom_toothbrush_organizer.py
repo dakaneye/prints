@@ -48,7 +48,13 @@ def test_body_geometry_invariants():
         _run(BODY_SCRIPT, BODY_STL)
     mesh = trimesh.load(str(BODY_STL))
     assert mesh.is_watertight, "Body mesh is not watertight — would not slice cleanly"
-    assert mesh.body_count == 1, f"Expected one connected body, got {mesh.body_count}"
+    # The closed top deck seals the internal voids, so trimesh reports one extra
+    # shell per void on top of the outer body (build123d fuses it to one solid).
+    # Confirm exactly one component spans the full part — i.e. the outer shell
+    # is intact and nothing broke off into a second large piece.
+    components = mesh.split(only_watertight=False)
+    outer = [c for c in components if c.extents.max() > 150]
+    assert len(outer) == 1, f"Expected one outer shell, got {len(outer)} large pieces"
     # Nominal outer bounds 188 (X) x 70 (Y) x 80 (Z); reeding adds ~0.5 mm of
     # crest to the X/Y extents. Sorted: depth < height < width.
     depth, height, width = sorted(mesh.extents)

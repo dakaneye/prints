@@ -13,7 +13,10 @@
   flutes only run between them, for a finished lip above and below.
 - Reworked from a solid-with-pockets block into a thin-walled hollow shell to
   cut a ~13 h print: 3 mm outer wall/floor, 2.4 mm socket walls, mostly-empty
-  interior split by a wet/dry divider. Material ~680 → ~285 cm³. Brush holes are
-  now thin free-standing sockets. Re-slice to confirm the new print time.
+  interior split by a wet/dry divider. Brush holes are now thin sockets.
+- Capped with a 3 mm solid top deck so the top is a clean surface showing only
+  the holes (no open negative space). Sockets/divider/rib hold the deck up; it
+  bridges only short hidden spans, so it still prints upright with no supports.
+  Material ~315 cm³ vs ~680 solid. Re-slice to confirm the new print time.
 - Verify before printing: caliper the actual manual brushes against the Ø16
   bores, and eyeball the reeding against the q-tip holder it's styled after.

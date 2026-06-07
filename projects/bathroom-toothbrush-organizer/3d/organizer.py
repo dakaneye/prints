@@ -1,11 +1,12 @@
 """Family bathroom organizer with a smoothly-reeded outer wall.
 
 A thin-walled hollow shell — not a solid block — so it prints fast and uses
-little filament. The outer wall is fluted with fine vertical reeding (each
-perimeter point displaced by a sine of its arc length, then extruded), bounded
-by a smooth base band and top rim. The interior is mostly empty: a thin wet/dry
-divider splits it into two compartments, and the functional features stand in
-them as thin-walled sockets:
+little filament, capped by a solid top deck so the top reads as a smooth surface
+with only the holes showing. The outer wall is fluted with fine vertical reeding
+(each perimeter point displaced by a sine of its arc length, then extruded),
+bounded by a smooth base band and top rim. The interior is mostly empty: a thin
+wet/dry divider splits it into two compartments and the functional features
+stand in them as thin-walled sockets running floor-to-deck:
 
   * Wet zone (left): three Ø18 brush sockets in a back row and one toothpaste
     pocket up front, each a thin tube with a Ø4 drain hole through the floor so
@@ -14,8 +15,9 @@ them as thin-walled sockets:
     (no drain) so sheeting water can't reach it, capped by the separate
     qtip_lid.py lift-off lid.
 
-Print orientation: upright, as it sits. Every feature is vertical or open at
-the top — no bridges, no supports. See README.
+Print orientation: upright, as it sits — no supports. The sockets, divider, and
+a thin rib hold the deck up, so it bridges only short (≤ ~10 mm) hidden spans.
+See README.
 """
 
 import math
@@ -53,9 +55,12 @@ RIM_TOP = 5.0  # smooth top rim band height
 
 WALL = 3.0  # outer-shell and wet/dry divider wall thickness
 SOCK_WALL = 2.4  # wall thickness of the brush sockets / toothpaste / oval well
-FLOOR = 3.0  # thin floor under the open interior and the pockets
+FLOOR = 3.0  # thin floor under the interior and the pockets
+DECK = 3.0  # solid top deck — smooth top surface, only the holes show through
 DRAIN_D = 4.0  # drain-hole diameter through the floor
-DIVIDER_X = 10.0  # X of the wet/dry divider wall
+DIVIDER_X = -2.0  # X of the wet/dry divider, snug against the wet cluster
+RIB_X = 8.0  # thin rib supporting the deck across the dry-zone void
+RIB_T = 1.6  # rib thickness
 
 BRUSH_D = 18.0  # brush socket bore (fits adult + kids' manual brushes)
 BRUSH_Y = 14.0  # back row, +Y of center
@@ -77,7 +82,7 @@ WET_DRAINS = ((-5.0, 14.0), (-5.0, -15.0))
 
 # ─── Geometry ──
 BOTTOM = (Align.CENTER, Align.CENTER, Align.MIN)
-FEAT_H = HEIGHT - FLOOR - RIM_TOP  # height of interior walls/sockets/divider
+POST_H = HEIGHT - FLOOR  # interior walls run floor → top, holding up the deck
 
 
 def _reeded_profile():
@@ -128,29 +133,34 @@ part = part + extrude(rim, amount=RIM_BOTTOM)
 part = part + Pos(0, 0, HEIGHT - RIM_TOP) * extrude(rim, amount=RIM_TOP)
 
 # Hollow it out: remove an inner cavity inset by WALL (measured from the flute
-# valleys) from the floor up to the open top. This leaves a thin reeded shell.
+# valleys), from the floor up to the underside of the top deck. This leaves a
+# thin reeded shell with a thin floor and a solid top deck.
 inner = RectangleRounded(
     WIDTH - 2 * (WALL + FLUTE_DEPTH),
     DEPTH - 2 * (WALL + FLUTE_DEPTH),
     max(2.0, CORNER_R - WALL),
 )
 inner_depth = DEPTH - 2 * (WALL + FLUTE_DEPTH)
-part = part - Pos(0, 0, FLOOR) * extrude(inner, amount=HEIGHT - FLOOR)
+part = part - Pos(0, 0, FLOOR) * extrude(inner, amount=HEIGHT - FLOOR - DECK)
 
-# Wet/dry divider wall, floor to just under the top rim, spanning the cavity.
-part = part + Pos(DIVIDER_X, 0, FLOOR) * Box(WALL, inner_depth, FEAT_H, align=BOTTOM)
+# Interior walls run floor → top, both shaping the features and holding up the
+# deck so it bridges only short spans when printed upright.
+# Wet/dry divider, snug against the wet cluster.
+part = part + Pos(DIVIDER_X, 0, FLOOR) * Box(WALL, inner_depth, POST_H, align=BOTTOM)
+# Thin rib supporting the deck across the open dry-zone void left of the oval.
+part = part + Pos(RIB_X, 0, FLOOR) * Box(RIB_T, inner_depth, POST_H, align=BOTTOM)
 
-# Add the thin-walled feature posts standing in the hollow, then bore them out.
+# Thin-walled feature posts standing floor-to-deck, bored out below.
 for cx in BRUSH_X:
-    part = part + Pos(cx, BRUSH_Y, FLOOR) * Cylinder(BRUSH_D / 2 + SOCK_WALL, FEAT_H, align=BOTTOM)
+    part = part + Pos(cx, BRUSH_Y, FLOOR) * Cylinder(BRUSH_D / 2 + SOCK_WALL, POST_H, align=BOTTOM)
 part = part + Pos(TP_X, TP_Y, FLOOR) * Box(
-    TP_W + 2 * SOCK_WALL, TP_L + 2 * SOCK_WALL, FEAT_H, align=BOTTOM
+    TP_W + 2 * SOCK_WALL, TP_L + 2 * SOCK_WALL, POST_H, align=BOTTOM
 )
 part = part + Pos(QT_X, 0, FLOOR) * extrude(
-    Ellipse(QT_RX + SOCK_WALL, QT_RY + SOCK_WALL), amount=FEAT_H
+    Ellipse(QT_RX + SOCK_WALL, QT_RY + SOCK_WALL), amount=POST_H
 )
 
-# Brush bores (over-tall so they open through the top rim) + floor drains.
+# Brush bores (over-tall so they open through the deck) + floor drains.
 for cx in BRUSH_X:
     part = part - Pos(cx, BRUSH_Y, FLOOR) * Cylinder(BRUSH_D / 2, HEIGHT, align=BOTTOM)
     part = part - Pos(cx, BRUSH_Y, 0) * Cylinder(DRAIN_D / 2, FLOOR + 1, align=BOTTOM)
