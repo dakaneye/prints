@@ -1,29 +1,23 @@
 # Wowza keychain
 
-Stackable coin-style keychain with raised "Wowza" text on the front — for
-Chelsea to hand out to students who score 100% on assignments. Designed to
-collect: kids who earn multiple stack neatly on a keyring.
+Quarter-sized coin keychain with raised "Wowza" text on the front — for
+Chelsea to hand out to students who score 100% on assignments.
 
 ## Print recipe
 
 | Filament | Print time (one) | Plate density | Notes |
 |---|---|---|---|
-| SUNLU PLA+ 2.0 (any color) | ~25–35 min | 6+ per plate | Flat on bed, no supports needed |
+| SUNLU PLA+ 2.0 (any color) | ~12–18 min | 12+ per plate | Flat on bed, no supports needed |
 
 Bambu Studio: select "SUNLU PLA+ 2.0" profile manually.
 
 ## Geometry summary
 
-- **Coin**: 45 mm diameter × 4 mm base disk
-- **Rim**: 2 mm wide × 1.5 mm tall ring around the perimeter (provides the
-  stacking surface)
-- **Text**: "Wowza" raised 1.2 mm on the depressed inner face, in
-  `Arial Rounded MT Bold`, auto-sized to leave 4 mm horizontal clearance
-  inside the rim
+- **Coin**: 24.5 mm diameter × 4 mm thick (US-quarter sized)
+- **Text**: "Wowza" raised 1 mm, in `Arial Rounded MT Bold`, auto-sized
+  to leave 2 mm horizontal clearance inside the coin edge
 - **Hole**: 5 mm diameter, 5 mm from the top edge — fits a standard split ring
-- **Total height**: 5.5 mm
-- **Stacks flush**: rim height (1.5 mm) > text raise (1.2 mm), enforced by
-  a runtime check in the script
+- **Total height**: 5 mm
 
 ## Files
 

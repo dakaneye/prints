@@ -12,20 +12,20 @@ from build123d import (
 )
 
 # ─── Parameters (mm) ──
-WORD = "Wowza"
+WORD = "WOWZA"
 FONT = "Arial Rounded MT Bold"
 
-COIN_DIAM = 45.0  # silver-dollar size
-COIN_THICKNESS = 4.0
+COIN_DIAM = 24.5  # US-quarter sized
+COIN_THICKNESS = 2.0  # half-thickness for a thinner, more coin-like feel
 
 # Rim around the edge — the stacking surface. Coins rest rim-to-bottom
 # when stacked, so RIM_HEIGHT must exceed TEXT_RAISE (enforced below).
-RIM_WIDTH = 2.0
+RIM_WIDTH = 1.2
 RIM_HEIGHT = 1.5
 
-TEXT_RAISE = 1.2
-TEXT_MARGIN = 4.0  # clearance from rim's inner edge to text
-TEXT_Y_OFFSET = -3.0  # shift text down to leave room for the hole at the top
+TEXT_RAISE = 1.0  # raised text height — readable + printable
+TEXT_MARGIN = 2.5  # clearance from rim's inner edge to text
+TEXT_Y_OFFSET = -2.0  # shift text down to leave room for the hole at the top
 
 HOLE_DIAM = 5.0  # threads any standard split ring (wire ø 1–2 mm)
 HOLE_FROM_EDGE = 5.0
@@ -56,8 +56,8 @@ rim_inner = Cylinder(
 )
 rim = Pos(0, 0, COIN_THICKNESS) * (rim_outer - rim_inner)
 
-# Text sized from a sample render so it always fills the inner face cleanly,
-# even if you change COIN_DIAM or RIM_WIDTH later.
+# Text auto-sized to fit inside the depressed inner face. Resize COIN_DIAM
+# or RIM_WIDTH and the text scales with it; no hand-tuning needed.
 sample = Text(WORD, font_size=10.0, font=FONT)
 sample_bb = sample.bounding_box()
 text_font_size = 10.0 * (

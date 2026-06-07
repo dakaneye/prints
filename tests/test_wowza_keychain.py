@@ -52,6 +52,7 @@ def test_stl_geometry_invariants():
     )
 
     w, d, h = mesh.extents
-    assert 30 < w < 80, f"Width out of plausible range: {w:.1f} mm"
-    assert 30 < d < 80, f"Depth out of plausible range: {d:.1f} mm"
-    assert 4 < h < 10, f"Height out of plausible range: {h:.1f} mm"
+    # Bounds cover both v1 (45 mm) and v2 (24.5 mm quarter-sized) layouts.
+    assert 20 < w < 80, f"Width out of plausible range: {w:.1f} mm"
+    assert 20 < d < 80, f"Depth out of plausible range: {d:.1f} mm"
+    assert 3 < h < 10, f"Height out of plausible range: {h:.1f} mm"

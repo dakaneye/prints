@@ -30,7 +30,7 @@ prints/
 | Project | Status | Description |
 |---|---|---|
 | `wizard-figurine-for-wallace` | in progress | Wizard-themed figurine with a personalized engraved oak display base |
-| `wowza-keychain` | in progress | Stackable coin keychain with raised "Wowza" text — student rewards |
+| `wowza-keychain` | in progress | Quarter-sized coin keychain with raised "Wowza" text — student rewards |
 | `spiral-fidget-hexagonal` | queued | Print-in-place spring fidget — desk toy |
 | `infinite-cube` | queued | Sculptural display cube with internal voids — desk piece |
 | `fibonacci-sphere-ball` | queued | Airless Fibonacci-lattice ball — toddler play |
