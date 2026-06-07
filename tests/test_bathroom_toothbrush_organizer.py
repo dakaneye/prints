@@ -1,0 +1,56 @@
+"""Smoke + invariant tests for the bathroom toothbrush organizer generators."""
+
+import subprocess
+import sys
+from pathlib import Path
+
+import trimesh
+
+REPO_ROOT = Path(__file__).parent.parent
+PROJECT_3D = REPO_ROOT / "projects" / "bathroom-toothbrush-organizer" / "3d"
+
+BODY_SCRIPT = PROJECT_3D / "organizer.py"
+BODY_STL = PROJECT_3D / "out" / "organizer.stl"
+
+LID_SCRIPT = PROJECT_3D / "qtip_lid.py"
+LID_STL = PROJECT_3D / "out" / "qtip_lid.stl"
+
+
+def _run(script: Path, out_stl: Path) -> None:
+    if out_stl.exists():
+        out_stl.unlink()
+    result = subprocess.run(
+        [sys.executable, str(script)],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 0, (
+        f"{script.name} exited {result.returncode}\n"
+        f"stdout:\n{result.stdout}\nstderr:\n{result.stderr}"
+    )
+    assert out_stl.is_file(), f"Expected {out_stl} after running {script.name}"
+
+
+def test_body_script_exists():
+    assert BODY_SCRIPT.is_file(), f"Missing generator: {BODY_SCRIPT}"
+
+
+def test_body_produces_valid_stl():
+    _run(BODY_SCRIPT, BODY_STL)
+    assert BODY_STL.stat().st_size > 50_000, (
+        f"Body STL suspiciously small ({BODY_STL.stat().st_size} bytes) — geometry may be broken"
+    )
+
+
+def test_body_geometry_invariants():
+    if not BODY_STL.exists():
+        _run(BODY_SCRIPT, BODY_STL)
+    mesh = trimesh.load(str(BODY_STL))
+    assert mesh.is_watertight, "Body mesh is not watertight — would not slice cleanly"
+    assert mesh.body_count == 1, f"Expected one connected body, got {mesh.body_count}"
+    # Nominal outer bounds 165 (X) x 70 (Y) x 80 (Z); scallops trim X/Y a few mm.
+    x, y, z = sorted(mesh.extents)
+    assert 60 < x < 75, f"Depth extent out of range: {x:.1f} mm"
+    assert 75 < y < 85, f"Height extent out of range: {y:.1f} mm"
+    assert 155 < z < 170, f"Width extent out of range: {z:.1f} mm"
