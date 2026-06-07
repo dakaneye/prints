@@ -46,6 +46,10 @@ FLUTE_PITCH = 7.5
 FLUTE_DEPTH = 0.55
 PERIMETER_SAMPLES = 900
 
+# Smooth, un-reeded rim bands top and bottom — the flutes live between them.
+RIM_BOTTOM = 6.0  # smooth base band height
+RIM_TOP = 5.0  # smooth top rim band height
+
 FLOOR = 4.0  # solid floor thickness under the wet pockets
 DRAIN_D = 4.0  # drain-hole diameter through the floor
 
@@ -107,6 +111,14 @@ def _reeded_profile():
 
 
 part = extrude(_reeded_profile(), amount=HEIGHT)
+
+# Smooth rim bands at the base and top. The rim outline is the nominal rect
+# offset outward by the flute amplitude, so it sits flush with the flute crests
+# and fills the valley recesses within each band — giving a clean smooth lip
+# above and below the reeding.
+rim = RectangleRounded(WIDTH + 2 * FLUTE_DEPTH, DEPTH + 2 * FLUTE_DEPTH, CORNER_R + FLUTE_DEPTH)
+part = part + extrude(rim, amount=RIM_BOTTOM)
+part = part + Pos(0, 0, HEIGHT - RIM_TOP) * extrude(rim, amount=RIM_TOP)
 
 # Wet zone: three brush bores down to the floor, each with a floor drain hole.
 for cx in BRUSH_X:
