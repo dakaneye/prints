@@ -50,3 +50,12 @@ def test_plug_produces_valid_stl():
     assert out.stat().st_size > 10_000, f"plug STL suspiciously small ({out.stat().st_size} bytes)"
     mesh = trimesh.load(str(out))
     assert mesh.body_count == 1, f"plug should be one connected solid, got {mesh.body_count}"
+
+
+def test_retainer_produces_valid_stl():
+    out = _run("retainer.py")
+    assert out.stat().st_size > 3_000, (
+        f"retainer STL suspiciously small ({out.stat().st_size} bytes)"
+    )
+    mesh = trimesh.load(str(out))
+    assert mesh.is_watertight, "retainer mesh not watertight"
