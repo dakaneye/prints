@@ -53,18 +53,18 @@ RIM_TOP = 5.0  # smooth top rim band height
 FLOOR = 4.0  # solid floor thickness under the wet pockets
 DRAIN_D = 4.0  # drain-hole diameter through the floor
 
-BRUSH_D = 16.0  # brush bore diameter (fits adult + kids' manual brushes)
+BRUSH_D = 18.0  # brush bore diameter (fits adult + kids' manual brushes)
 BRUSH_Y = 14.0  # back row, +Y of center
-BRUSH_X = (-65.0, -43.0, -21.0)  # three bores across the wet zone
+BRUSH_X = (-66.0, -43.0, -20.0)  # three bores across the wet zone
 
-TP_W = 50.0  # toothpaste pocket size (X)
-TP_L = 26.0  # toothpaste pocket size (Y)
-TP_X = -50.0  # toothpaste pocket center X
-TP_Y = -16.0  # front row, -Y of center
+TP_W = 56.0  # toothpaste pocket size (X)
+TP_L = 30.0  # toothpaste pocket size (Y)
+TP_X = -49.0  # toothpaste pocket center X
+TP_Y = -15.0  # front row, -Y of center
 
-QT_RX = 28.0  # q-tip well ellipse radius in X (well is 56 wide)
-QT_RY = 21.0  # q-tip well ellipse radius in Y (well is 42 deep); long axis L-R
-QT_X = 58.0  # right end
+QT_RX = 32.0  # q-tip well ellipse radius in X (well is 64 wide)
+QT_RY = 23.0  # q-tip well ellipse radius in Y (well is 46 deep); long axis L-R
+QT_X = 50.0  # center-right (pulled in from the end for a more balanced layout)
 QT_FLOOR = FLOOR + 3.0  # raised solid floor — keeps q-tips dry, no drain hole
 
 # ─── Geometry ──

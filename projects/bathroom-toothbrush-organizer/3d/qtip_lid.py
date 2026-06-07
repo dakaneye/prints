@@ -13,8 +13,8 @@ from pathlib import Path
 from build123d import Ellipse, Pos, export_stl, extrude
 
 # ─── Parameters (mm) ──
-WELL_RX = 28.0  # must match QT_RX in organizer.py
-WELL_RY = 21.0  # must match QT_RY in organizer.py
+WELL_RX = 32.0  # must match QT_RX in organizer.py
+WELL_RY = 23.0  # must match QT_RY in organizer.py
 CLEARANCE = 0.8  # diametral gap so the plug hand-fits the well (0.4 per side)
 
 CAP_OVERHANG = 3.0  # cap reach beyond the well, rests on the body top

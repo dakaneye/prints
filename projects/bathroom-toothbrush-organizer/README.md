@@ -18,10 +18,10 @@ with a smooth vertically-reeded outer wall. Design history:
 - Body: 188 W × 70 D × 80 H mm, 18 mm corner radius
 - Outer wall: smooth vertical reeding, ~7.5 mm flute pitch, ~0.55 mm deep,
   bounded by a smooth 6 mm base band and 5 mm top rim (flush with flute crests)
-- Brush bores: 3 × Ø16 mm, back row, Ø4 floor drain each
-- Toothpaste pocket: 50 × 26 mm, front, Ø4 floor drain
-- Q-tip well: 56 × 42 mm oval (long axis left-right), raised solid floor (no drain)
-- Lid: 62 × 48 mm oval × 9 mm, plug-fit (0.8 mm clearance)
+- Brush bores: 3 × Ø18 mm, back row, Ø4 floor drain each
+- Toothpaste pocket: 56 × 30 mm, front, Ø4 floor drain
+- Q-tip well: 64 × 46 mm oval (long axis left-right), center-right, raised solid floor (no drain)
+- Lid: 70 × 52 mm oval × 9 mm, plug-fit (0.8 mm clearance)
 
 ## Regenerate
 

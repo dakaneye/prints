@@ -74,8 +74,8 @@ def test_lid_geometry_invariants():
     mesh = trimesh.load(str(LID_STL))
     assert mesh.is_watertight, "Lid mesh is not watertight"
     assert mesh.body_count == 1, f"Expected one connected body, got {mesh.body_count}"
-    # Oval cap 62 (X) x 48 (Y), total height 9 mm. Sorted: height < short < long.
+    # Oval cap 70 (X) x 52 (Y), total height 9 mm. Sorted: height < short < long.
     height, short_axis, long_axis = sorted(mesh.extents)
     assert 7 < height < 12, f"Lid height out of range: {height:.1f} mm"
-    assert 42 < short_axis < 54, f"Lid short axis out of range: {short_axis:.1f} mm"
-    assert 56 < long_axis < 68, f"Lid long axis out of range: {long_axis:.1f} mm"
+    assert 46 < short_axis < 58, f"Lid short axis out of range: {short_axis:.1f} mm"
+    assert 62 < long_axis < 74, f"Lid long axis out of range: {long_axis:.1f} mm"
