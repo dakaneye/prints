@@ -27,7 +27,11 @@ LBORE_R = 3.5  # L-channel radius
 LEVER_LEN = 30.0
 LEVER_WIDTH = 9.0
 LEVER_THK = 5.0
-LEVER_LIFT = 3.0  # paddle sits this far above the seat top
+# Paddle must sweep ABOVE the body's gasket flange (a 33 mm disc standing at
+# the −X face, top edge near Z=16.5) so the lever clears it in the open
+# position where it points at the flange. Flange top is at SEAT_DEPTH/2 + 7.5;
+# lift the paddle just above that.
+LEVER_LIFT = 9.0  # paddle this far above the seat top → bottom at Z=18 > flange
 NECK_R = 5.25  # joins paddle to plug top as one body
 
 BOTTOM = (Align.CENTER, Align.CENTER, Align.MIN)
