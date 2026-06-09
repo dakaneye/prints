@@ -1,59 +1,27 @@
-"""Assembly guards for the pitcher-spigot-valve.
+"""Assembly guards for the pitcher-spigot-valve (lever-poppet design).
 
-Two layers:
-
-1. Parameter-consistency arithmetic (fast, deterministic) mirroring the design
-   contract in docs/superpowers/specs/2026-06-07-pitcher-spigot-valve-design.md.
-2. A geometric interference check that reconstructs the body and plug (same
-   coordinate frame) and asserts the plug does not collide with the body in any
-   rotational position. This catches cross-part collisions the per-part smoke
-   tests cannot — e.g. the lever sweeping into the gasket flange.
+The PETG body feeds a chamber; a TPU stopper rests on a solid seat floor and
+seals a Ø6 throat. Importing each generator regenerates its STL, then these
+checks assert, in the shared coordinate frame:
+  - the body is ONE watertight solid (no loose pieces; holds water),
+  - the barrel clears the glass hole,
+  - the stopper rests on the seat with no collision,
+  - the solid floor stops it falling through the spout,
+  - it lifts clear to pour.
 """
 
 import importlib.util
 import sys
 from pathlib import Path
 
+import trimesh
+from build123d import Pos
+
 REPO_ROOT = Path(__file__).parent.parent
 SCRIPT_DIR = REPO_ROOT / "projects" / "pitcher-spigot-valve" / "3d"
-
-# ─── Design contract (mm) ──
 HOLE_DIA = 15.8
-THREAD_CREST_R = 7.65
-SEAT_TOP_R = 9.0
-SEAT_BOT_R = 8.0
-SEAT_DEPTH = 18.0
-PLUG_CLEAR = 0.25
-LBORE_R = 3.5
-BARREL_BORE_R = 5.0
-SPOUT_DROP = 18.0
-CLEARANCE_TO_BASE = 30.0  # measured: hole bottom → base
 
 
-# ─── Parameter-consistency arithmetic ──
-def test_barrel_clears_glass_hole():
-    barrel_od = 2 * THREAD_CREST_R
-    assert barrel_od < HOLE_DIA, f"barrel OD {barrel_od} must clear the {HOLE_DIA} glass hole"
-
-
-def test_plug_fits_seat_with_clearance():
-    assert PLUG_CLEAR > 0, "plug must be smaller than the seat"
-    assert SEAT_BOT_R - PLUG_CLEAR > LBORE_R + 0.8, (
-        "plug wall too thin around the L-bore at the narrow end"
-    )
-
-
-def test_lbore_connects_inlet_and_spout():
-    assert LBORE_R <= BARREL_BORE_R, "L-bore wider than the barrel bore"
-
-
-def test_spout_within_vertical_budget():
-    assert SPOUT_DROP < CLEARANCE_TO_BASE, (
-        f"spout drop {SPOUT_DROP} exceeds {CLEARANCE_TO_BASE} to the base"
-    )
-
-
-# ─── Geometric interference check ──
 def _load(name):
     spec = importlib.util.spec_from_file_location(name, SCRIPT_DIR / f"{name}.py")
     mod = importlib.util.module_from_spec(spec)
@@ -63,22 +31,30 @@ def _load(name):
 
 
 def _overlap_volume(part_a, part_b):
-    """Solid intersection volume; build123d returns None for an empty result."""
+    """Solid intersection volume; build123d returns None/empty for no overlap."""
     inter = part_a & part_b
-    return 0.0 if inter is None else inter.volume
+    return 0.0 if inter is None or len(inter.solids()) == 0 else inter.volume
 
 
-def test_plug_does_not_interfere_with_body():
-    """Plug must seat and turn without colliding with body material, both
-    open (lever toward flange) and closed (lever 90°)."""
-    from build123d import Rot
+def test_body_is_one_watertight_solid():
+    body = _load("valve_body").body
+    assert len(body.solids()) == 1, "body must be a single solid — loose pieces won't print"
+    mesh = trimesh.load(str(SCRIPT_DIR / "out" / "valve_body.stl"), force="mesh")
+    assert mesh.is_watertight, "body mesh must be watertight (it holds water)"
+    assert mesh.body_count == 1, "body mesh must be one connected piece"
 
-    body = _load("body").body
-    plug = _load("plug").plug_final
 
-    for angle in (0, 45, 90):
-        vol = _overlap_volume(Rot(0, 0, angle) * plug, body)
-        assert vol < 1.0, (
-            f"plug collides with body at {angle}° (overlap {vol:.2f} mm^3) — "
-            "check lever/flange clearance and plug-seat taper"
-        )
+def test_barrel_clears_glass_hole():
+    vb = _load("valve_body")
+    barrel_od = 2 * (vb.BARREL_CORE_R + vb.THREAD_DEPTH / 2)
+    assert barrel_od < HOLE_DIA, f"barrel OD {barrel_od:.1f} must clear the {HOLE_DIA} glass hole"
+
+
+def test_stopper_seats_seals_and_opens():
+    body = _load("valve_body").body
+    poppet = _load("poppet").poppet
+    assert _overlap_volume(body, poppet) < 1.0, "stopper must rest on the seat without colliding"
+    assert _overlap_volume(body, Pos(0, 0, -1) * poppet) > 5.0, (
+        "solid seat floor must stop the stopper dropping through the throat"
+    )
+    assert _overlap_volume(body, Pos(0, 0, 5) * poppet) < 1.0, "stopper must lift clear to pour"

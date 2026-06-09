@@ -1,9 +1,15 @@
-"""Smoke + geometry tests for the pitcher-spigot-valve generators."""
+"""Smoke tests for the pitcher-spigot-valve generators.
+
+Runs each part's generator and asserts it emits a non-trivial STL. The rigid
+printed parts must be watertight single solids (loose pieces won't slice). The
+soft seals (gasket, poppet, cap) just need to be valid, non-trivial meshes.
+"""
 
 import subprocess
 import sys
 from pathlib import Path
 
+import pytest
 import trimesh
 
 REPO_ROOT = Path(__file__).parent.parent
@@ -16,10 +22,7 @@ def _run(script_name: str) -> Path:
     if out_stl.exists():
         out_stl.unlink()
     result = subprocess.run(
-        [sys.executable, str(script)],
-        check=False,
-        capture_output=True,
-        text=True,
+        [sys.executable, str(script)], check=False, capture_output=True, text=True
     )
     assert result.returncode == 0, (
         f"{script_name} exited {result.returncode}\n"
@@ -29,33 +32,32 @@ def _run(script_name: str) -> Path:
     return out_stl
 
 
-def test_nut_produces_valid_stl():
-    out = _run("nut.py")
-    assert out.stat().st_size > 5_000, f"nut STL suspiciously small ({out.stat().st_size} bytes)"
-    mesh = trimesh.load(str(out))
-    assert mesh.is_watertight, "nut mesh not watertight — would not slice cleanly"
+# (script, min_bytes, must_be_one_watertight_solid)
+PARTS = [
+    ("valve_body.py", 100_000, True),
+    ("poppet.py", 5_000, True),
+    ("lever.py", 8_000, True),
+    ("cap.py", 5_000, True),
+    ("nut.py", 5_000, True),
+    ("gasket.py", 5_000, True),
+    ("pin.py", 2_000, True),
+]
 
 
-def test_body_produces_valid_stl():
-    out = _run("body.py")
-    assert out.stat().st_size > 20_000, f"body STL suspiciously small ({out.stat().st_size} bytes)"
+@pytest.mark.parametrize("script,min_bytes,watertight", PARTS)
+def test_part_produces_valid_stl(script, min_bytes, watertight):
+    out = _run(script)
+    size = out.stat().st_size
+    assert size > min_bytes, f"{script} STL suspiciously small ({size} bytes)"
     mesh = trimesh.load(str(out))
-    assert mesh.is_watertight, "body mesh not watertight — would not slice cleanly"
-    assert mesh.body_count == 1, f"body should be one connected solid, got {mesh.body_count}"
+    if watertight:
+        assert mesh.is_watertight, f"{script} mesh not watertight — would not slice cleanly"
+        assert mesh.body_count == 1, (
+            f"{script} should be one connected solid, got {mesh.body_count}"
+        )
+
+
+def test_body_within_size_budget():
+    out = _run("valve_body.py")
+    mesh = trimesh.load(str(out))
     assert max(mesh.extents) < 70, f"body unexpectedly large: {mesh.extents}"
-
-
-def test_plug_produces_valid_stl():
-    out = _run("plug.py")
-    assert out.stat().st_size > 10_000, f"plug STL suspiciously small ({out.stat().st_size} bytes)"
-    mesh = trimesh.load(str(out))
-    assert mesh.body_count == 1, f"plug should be one connected solid, got {mesh.body_count}"
-
-
-def test_retainer_produces_valid_stl():
-    out = _run("retainer.py")
-    assert out.stat().st_size > 3_000, (
-        f"retainer STL suspiciously small ({out.stat().st_size} bytes)"
-    )
-    mesh = trimesh.load(str(out))
-    assert mesh.is_watertight, "retainer mesh not watertight"
