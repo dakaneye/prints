@@ -82,10 +82,12 @@ spout_cone = Pos(XC, 0, -CONE_H) * Cone(SPOUT_OR, CH_OR, CONE_H, align=BOTTOM)
 PIVOT_X = XC + 10.0  # 24
 PIVOT_Z = -23.0
 PIN_R = 1.6  # Ø3.2 pin clearance hole
+CB_R = 2.6  # Ø5.2 counterbore — the pin head seats flush in the −Y ear
+CB_DEPTH = 2.1
 # Ears 3.5 mm thick (Y 4..7.5), with >2 mm of plastic all round the pin hole:
-# the block runs Z=−27..−14 (4 mm below the hole at −23) and X=17..28 (2.4 mm
-# past the hole at X=24).
-yoke_block = Pos(22.0, 0, -20.5) * Box(10, 15, 13)  # X17..27 Y-7.5..7.5 Z-27..-14
+# the block runs Z=−27..−14 (4 mm below the hole at −23) and X=17..28 (so the
+# Ø5.2 head counterbore at X=24 still keeps ~1.4 mm wall to the +X edge).
+yoke_block = Pos(22.5, 0, -20.5) * Box(11, 15, 13)  # X17..28 Y-7.5..7.5 Z-27..-14
 yoke_slot = Pos(19.5, 0, -22.25) * Box(19, 8, 11.5)  # lever slot, open bottom; leaves two ears
 yoke = yoke_block - yoke_slot
 struct = chamber + spout + spout_cone + stub + flange + yoke
@@ -118,9 +120,11 @@ pivot_hole = Pos(PIVOT_X, 0, PIVOT_Z) * (Rot(90, 0, 0) * Cylinder(PIN_R, 18))
 # Open the slot up through the yoke web (centre only) over the +X half so the
 # lever's neck can rise out — the ears still tie to the spout via the web at
 # X<21, which is untouched.
-handle_clear = Pos(23.75, 0, -14.75) * Box(7.5, 2 * 4.0, 5.0)
+handle_clear = Pos(24.0, 0, -14.75) * Box(8.0, 2 * 4.0, 5.0)
+# Counterbore in the −Y ear so the pin head sits flush (retained, not proud).
+counterbore = Pos(PIVOT_X, -6.5, PIVOT_Z) * (Rot(90, 0, 0) * Cylinder(CB_R, CB_DEPTH))
 
-body = solid - cavity - spout_bore - seat_hole - feed - pivot_hole - handle_clear
+body = solid - cavity - spout_bore - seat_hole - feed - pivot_hole - handle_clear - counterbore
 
 # ─── Export ──
 out_dir = Path(__file__).parent / "out"
