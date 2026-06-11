@@ -58,3 +58,16 @@ def test_stopper_seats_seals_and_opens():
         "solid seat floor must stop the stopper dropping through the throat"
     )
     assert _overlap_volume(body, Pos(0, 0, 5) * poppet) < 1.0, "stopper must lift clear to pour"
+
+
+def test_pin_passes_through_both_ears_and_lever():
+    """The pivot holes must go ALL the way through both yoke ears and the lever
+    boss. (A rotated `align=BOTTOM` cylinder silently drills only one side —
+    this guards that regression: a pin shaft must clear with no interference.)"""
+    from build123d import Cylinder, Rot
+
+    vb = _load("valve_body")
+    body, lever = vb.body, _load("lever").lever
+    shaft = Pos(vb.PIVOT_X, 0, vb.PIVOT_Z) * (Rot(90, 0, 0) * Cylinder(1.5, 16))
+    assert _overlap_volume(shaft, body) < 0.5, "pin must clear a through-hole in BOTH yoke ears"
+    assert _overlap_volume(shaft, lever) < 0.5, "pin must clear a through-hole in the lever boss"

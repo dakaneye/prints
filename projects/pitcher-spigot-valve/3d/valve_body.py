@@ -81,9 +81,12 @@ spout_cone = Pos(XC, 0, -CONE_H) * Cone(SPOUT_OR, CH_OR, CONE_H, align=BOTTOM)
 # through PIVOT. Exported so lever.py shares the pivot location.
 PIVOT_X = XC + 10.0  # 24
 PIVOT_Z = -23.0
-PIN_R = 1.7  # Ø3.4 pin hole
-yoke_block = Pos(21.5, 0, -19.5) * Box(9, 14, 11)  # X17..26 Y-7..7 Z-25..-14
-yoke_slot = Pos(19.0, 0, -21.0) * Box(16, 8, 9)  # remove center: lever-arm slot, open bottom
+PIN_R = 1.6  # Ø3.2 pin clearance hole
+# Ears 3.5 mm thick (Y 4..7.5), with >2 mm of plastic all round the pin hole:
+# the block runs Z=−27..−14 (4 mm below the hole at −23) and X=17..28 (2.4 mm
+# past the hole at X=24).
+yoke_block = Pos(22.0, 0, -20.5) * Box(10, 15, 13)  # X17..27 Y-7.5..7.5 Z-27..-14
+yoke_slot = Pos(19.5, 0, -22.25) * Box(19, 8, 11.5)  # lever slot, open bottom; leaves two ears
 yoke = yoke_block - yoke_slot
 struct = chamber + spout + spout_cone + stub + flange + yoke
 
@@ -109,8 +112,9 @@ seat_hole = Pos(XC, 0, -FLOOR_T) * Cylinder(SEAT_HOLE_R, FLOOR_T + 0.5, align=BO
 # Feed bore: Ø8 along −X at Z_IN, pitcher → chamber cavity.
 feed = Pos(BARREL_X0 - 1, 0, Z_IN) * (Rot(0, 90, 0) * Cylinder(BORE_R, STUB_LEN + 1, align=BOTTOM))
 
-# Pivot pin hole through both yoke ears (along Y).
-pivot_hole = Pos(PIVOT_X, 0, PIVOT_Z) * (Rot(90, 0, 0) * Cylinder(PIN_R, 20, align=BOTTOM))
+# Pivot pin hole through BOTH yoke ears (centred on Y so it passes all the way
+# through — a rotated align=BOTTOM cylinder would only drill one side).
+pivot_hole = Pos(PIVOT_X, 0, PIVOT_Z) * (Rot(90, 0, 0) * Cylinder(PIN_R, 18))
 
 body = solid - cavity - spout_bore - seat_hole - feed - pivot_hole
 

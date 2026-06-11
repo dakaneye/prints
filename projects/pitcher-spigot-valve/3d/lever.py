@@ -17,7 +17,7 @@ from build123d import Align, Box, Cylinder, Pos, Rot, export_stl
 # ─── Parameters (mm) — pivot matches valve_body.py ──
 PIVOT_X = 24.0
 PIVOT_Z = -23.0
-HOLE_R = 1.6  # Ø3.2 — runs on the Ø3 pin
+HOLE_R = 1.7  # Ø3.4 — runs freely on the Ø3 pin
 ARM_HALF_Y = 3.3  # fits the yoke slot (Y = ±4)
 FOOT_X = 14.0  # stem-foot axis (valve_body XC)
 ARM_TOP_Z = -22.0  # arm top meets the foot bottom here at rest
@@ -42,10 +42,9 @@ handle = Pos(PIVOT_X + 4, 0, PIVOT_Z + 4.5) * Rot(0, -40, 0) * Box(14, 2 * ARM_H
 paddle = Pos(PIVOT_X + 9.2, 0, PIVOT_Z + 8.5) * Box(4.5, 2 * (ARM_HALF_Y + 1.5), 9)
 
 lever = boss + arm + cradle_back + handle + paddle
-# Pin hole through the boss (along Y).
-pin_hole = Pos(PIVOT_X, 0, PIVOT_Z) * (
-    Rot(90, 0, 0) * Cylinder(HOLE_R, 2 * ARM_HALF_Y + 2, align=BOTTOM)
-)
+# Pin hole all the way through the boss — centred on Y (a rotated align=BOTTOM
+# cylinder would only drill halfway, leaving a blind hole).
+pin_hole = Pos(PIVOT_X, 0, PIVOT_Z) * (Rot(90, 0, 0) * Cylinder(HOLE_R, 8))
 lever -= pin_hole
 
 # ─── Export ──

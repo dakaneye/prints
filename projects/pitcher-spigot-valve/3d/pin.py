@@ -9,8 +9,8 @@ from pathlib import Path
 
 from build123d import Align, Cylinder, export_stl
 
-PIN_R = 1.45  # Ø2.9 — slips through the Ø3.2 lever hole / Ø3.4 yoke holes
-PIN_LEN = 16.0  # spans both yoke ears (Y = ±7)
+PIN_R = 1.5  # Ø3.0 — snug in the Ø3.2 yoke holes, free in the Ø3.4 lever hole
+PIN_LEN = 15.0  # spans the yoke outer width (Y = ±7.5), flush at the far ear
 HEAD_R = 2.5  # Ø5 head — can't pass through, so the pin can't fall out
 HEAD_H = 1.5
 
