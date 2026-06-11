@@ -18,7 +18,7 @@ from build123d import Align, Box, Cylinder, Pos, Rot, export_stl
 PIVOT_X = 24.0
 PIVOT_Z = -23.0
 HOLE_R = 1.7  # Ø3.4 — runs freely on the Ø3 pin
-ARM_HALF_Y = 3.3  # fits the yoke slot (Y = ±4)
+ARM_HALF_Y = 3.8  # fills the yoke slot (Y = ±4) with 0.2 mm clearance each side
 FOOT_X = 14.0  # stem-foot axis (valve_body XC)
 ARM_TOP_Z = -22.0  # arm top meets the foot bottom here at rest
 
