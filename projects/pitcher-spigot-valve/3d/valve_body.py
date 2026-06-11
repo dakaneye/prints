@@ -115,8 +115,12 @@ feed = Pos(BARREL_X0 - 1, 0, Z_IN) * (Rot(0, 90, 0) * Cylinder(BORE_R, STUB_LEN 
 # Pivot pin hole through BOTH yoke ears (centred on Y so it passes all the way
 # through — a rotated align=BOTTOM cylinder would only drill one side).
 pivot_hole = Pos(PIVOT_X, 0, PIVOT_Z) * (Rot(90, 0, 0) * Cylinder(PIN_R, 18))
+# Open the slot up through the yoke web (centre only) over the +X half so the
+# lever's neck can rise out — the ears still tie to the spout via the web at
+# X<21, which is untouched.
+handle_clear = Pos(23.75, 0, -14.75) * Box(7.5, 2 * 4.0, 5.0)
 
-body = solid - cavity - spout_bore - seat_hole - feed - pivot_hole
+body = solid - cavity - spout_bore - seat_hole - feed - pivot_hole - handle_clear
 
 # ─── Export ──
 out_dir = Path(__file__).parent / "out"
