@@ -47,11 +47,11 @@ def test_geometry_invariants():
     assert mesh.is_watertight, "Mesh is not watertight — would not slice cleanly"
 
     # Print pose: X = width, Y = depth, Z = height. Derived from parameters
-    # in holder.py: plate 189.6 wide × 97.4 tall, plate + pocket depth 18.4.
+    # in holder.py: plate 199.6 wide × 117.4 tall, plate + pocket depth 23.4.
     x, y, z = mesh.extents
-    assert abs(x - 189.6) < 0.1, f"Width {x:.2f}, expected 189.6"
-    assert abs(y - 18.4) < 0.1, f"Depth {y:.2f}, expected 18.4"
-    assert abs(z - 97.4) < 0.1, f"Height {z:.2f}, expected 97.4"
+    assert abs(x - 199.6) < 0.1, f"Width {x:.2f}, expected 199.6"
+    assert abs(y - 23.4) < 0.1, f"Depth {y:.2f}, expected 23.4"
+    assert abs(z - 117.4) < 0.1, f"Height {z:.2f}, expected 117.4"
 
     # Hollow sanity: pockets + magnet recesses must carve real volume out of
     # the bounding solid, but the part is far from empty either.
@@ -62,7 +62,7 @@ def test_geometry_invariants():
 
     # Both phone cavities exist: a section through each pocket's midplane
     # must show an interior gap at least POCKET_W wide and POCKET_D deep.
-    for x_center in (-45.4, 45.4):
+    for x_center in (-47.9, 47.9):
         section = mesh.section(plane_normal=[0, 0, 1], plane_origin=[x_center, 0, 55.0])
         assert section is not None, f"No material at z=55 near x={x_center}"
 

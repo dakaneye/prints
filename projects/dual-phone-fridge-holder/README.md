@@ -5,8 +5,8 @@ that mounts to the side of the refrigerator with press-fit neodymium magnets.
 Concept borrowed from the classic open-front wall-pocket phone holder;
 independent parametric design in build123d.
 
-- Backplate 189.6 × 97.4 × 3 mm, two pockets 78 × 13 mm interior, 45°
-  wedge floors that tip the phones toward the fridge
+- Backplate 199.6 × 117.4 × 3 mm, two pockets 83 × 18 mm interior with
+  80 mm walls, 45° wedge floors that tip the phones toward the fridge
 - Back face: 5×4 grid of ⌀6.3 × 1.8 mm recesses for 6×2 mm neodymium discs
   — press fit + a dab of CA glue each; magnets sit ~0.2 mm proud so they
   contact the steel directly

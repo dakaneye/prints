@@ -28,9 +28,9 @@ Phone basis: iPhone 16 Pro nominal 149.6 × 71.5 × 8.25 mm; case estimated
 
 | Feature | Value |
 |---|---|
-| Backplate | 189.6 × 97.4 × 3 mm, rounded corners r8 (width driven by two 82.8 mm pocket shells + 8 gap + 8 margins) |
-| Pocket interior | 78 W × 13 D per phone (~3 / ~2 mm case clearance) |
-| Pocket front-wall interior height | 65 mm above the floor's front lip |
+| Backplate | 199.6 × 117.4 × 3 mm, rounded corners r8 (width driven by two 87.8 mm pocket shells + 8 gap + 8 margins) |
+| Pocket interior | 83 W × 18 D per phone (~8 / ~7 mm case clearance — user asked for a roomier fit than the initial 78 × 13) |
+| Pocket front-wall interior height | 80 mm above the floor's front lip |
 | Pocket walls (front + sides) | 2.4 mm |
 | Gap between pockets | 8 mm |
 | Pocket floor | 45° wedge, ~3 mm thick, sloping down toward the backplate |

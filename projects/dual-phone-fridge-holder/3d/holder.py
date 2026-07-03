@@ -34,9 +34,10 @@ from build123d import (
 # All dimensions in mm.
 
 # iPhone 16 Pro nominal 71.5 × 8.25; case estimated ~75 × 11 (no calipers).
-POCKET_W = 78.0  # interior width per phone, ~3 mm case clearance
-POCKET_D = 13.0  # interior depth, ~2 mm case clearance
-POCKET_H = 65.0  # front-wall interior height above the floor's front lip
+# User-requested roomier fit over the initial 78 × 13 × 65 pockets.
+POCKET_W = 83.0  # interior width per phone, ~8 mm case clearance
+POCKET_D = 18.0  # interior front-to-back opening, ~7 mm case clearance
+POCKET_H = 80.0  # front-wall interior height above the floor's front lip
 WALL_T = 2.4  # pocket front + side wall thickness
 FLOOR_T = 3.0  # vertical thickness of the 45° wedge floor
 POCKET_GAP = 8.0  # gap between the two pockets
