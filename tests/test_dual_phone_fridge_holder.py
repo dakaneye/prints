@@ -47,11 +47,11 @@ def test_geometry_invariants():
     assert mesh.is_watertight, "Mesh is not watertight — would not slice cleanly"
 
     # Print pose: X = width, Y = depth, Z = height. Derived from parameters
-    # in holder.py: plate 189.6 wide × 107.4 tall, plate + pocket depth 18.4.
+    # in holder.py: plate 189.6 wide × 97.4 tall, plate + pocket depth 18.4.
     x, y, z = mesh.extents
     assert abs(x - 189.6) < 0.1, f"Width {x:.2f}, expected 189.6"
     assert abs(y - 18.4) < 0.1, f"Depth {y:.2f}, expected 18.4"
-    assert abs(z - 107.4) < 0.1, f"Height {z:.2f}, expected 107.4"
+    assert abs(z - 97.4) < 0.1, f"Height {z:.2f}, expected 97.4"
 
     # Hollow sanity: pockets + magnet recesses must carve real volume out of
     # the bounding solid, but the part is far from empty either.

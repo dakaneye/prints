@@ -5,7 +5,7 @@ that mounts to the side of the refrigerator with press-fit neodymium magnets.
 Concept borrowed from the classic open-front wall-pocket phone holder;
 independent parametric design in build123d.
 
-- Backplate 189.6 × 107.4 × 3 mm, two pockets 78 × 13 mm interior, 45°
+- Backplate 189.6 × 97.4 × 3 mm, two pockets 78 × 13 mm interior, 45°
   wedge floors that tip the phones toward the fridge
 - Back face: 5×4 grid of ⌀6.3 × 1.8 mm recesses for 6×2 mm neodymium discs
   — press fit + a dab of CA glue each; magnets sit ~0.2 mm proud so they
@@ -33,6 +33,11 @@ Orientation notes:
 
 - STL exports in print pose: standing upright on the backplate's bottom
   edge, in-use orientation
-- No supports, no bridges — pocket floors are 45° wedges, the finger-scoop
-  notches open upward, magnet recesses are 6 mm side-wall holes
+- **Rotate 90° in the slicer so the 190 mm axis runs front-to-back (Y)**
+  — the A1 bed only accelerates in Y, and that puts the shaking along the
+  plate's stiff direction instead of its 3 mm-thin one
 - **Use a 5 mm brim** — a 3 mm plate standing on edge is tip-prone
+- No supports, no bridges — pocket floors are 45° wedges starting 2 mm
+  above the bed (cross-section deepens to an L almost immediately), the
+  finger-scoop notches open upward, magnet recesses are 6 mm side-wall
+  holes

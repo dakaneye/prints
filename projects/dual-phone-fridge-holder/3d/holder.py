@@ -44,7 +44,9 @@ POCKET_GAP = 8.0  # gap between the two pockets
 PLATE_T = 3.0  # backplate thickness
 PLATE_MARGIN_X = 8.0  # backplate border beyond the pocket outer walls
 PLATE_CORNER_R = 8.0
-POCKET_Z0 = 12.0  # lowest point of the pocket wedge above the plate bottom
+POCKET_Z0 = 2.0  # lowest point of the pocket wedge above the plate bottom;
+# kept near the bed so the print's cross-section deepens to an L-shape
+# almost immediately — a bare 3 mm standing wall is the wobbly failure mode
 
 SCOOP_W = 30.0  # finger scoop width in each front wall
 SCOOP_DEPTH = 22.0  # scoop depth down from the wall top

@@ -28,7 +28,7 @@ Phone basis: iPhone 16 Pro nominal 149.6 × 71.5 × 8.25 mm; case estimated
 
 | Feature | Value |
 |---|---|
-| Backplate | 189.6 × 107.4 × 3 mm, rounded corners r8 (width driven by two 82.8 mm pocket shells + 8 gap + 8 margins) |
+| Backplate | 189.6 × 97.4 × 3 mm, rounded corners r8 (width driven by two 82.8 mm pocket shells + 8 gap + 8 margins) |
 | Pocket interior | 78 W × 13 D per phone (~3 / ~2 mm case clearance) |
 | Pocket front-wall interior height | 65 mm above the floor's front lip |
 | Pocket walls (front + sides) | 2.4 mm |
@@ -57,8 +57,11 @@ Verify empirically before trusting: mount empty → one phone → two phones.
 ## Print
 
 - Standing, in-use orientation (as exported). No supports; no bridges; all
-  overhangs ≤ 45° by construction.
-- 5 mm brim — a 3 mm plate standing on edge is tip-prone.
+  overhangs ≤ 45° by construction. Pocket wedges start 2 mm above the bed
+  so the standing cross-section stiffens into an L-shape immediately.
+- Rotate the long axis along Y on the A1 (bedslinger — shaking then acts
+  along the plate's stiff direction). 5 mm brim — a 3 mm plate standing on
+  edge is tip-prone.
 - SUNLU PLA+ 2.0 grey (manual profile select), 0.20 mm layer, 4 walls
   (pocket lips take pry loads), 15% infill. ~100 g, ~3 h.
 
