@@ -8,7 +8,7 @@ requires-python = ">=3.11,<3.14"
 # Installed by hookshot's python-ci.yml via `pip install -e ".[dev]"` for CI.
 # Also what you install locally if you want to run `pytest` from the repo root.
 dev = [
-    "build123d>=0.10.0",
+    "build123d>=0.11.1",
     "pytest>=7",
     "trimesh>=4",  # geometry-invariant assertions in smoke tests
 ]
