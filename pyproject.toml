@@ -10,7 +10,7 @@ requires-python = ">=3.11,<3.14"
 dev = [
     "build123d>=0.10.0",
     "pytest>=7",
-    "trimesh>=4",  # geometry-invariant assertions in smoke tests
+    "trimesh>=4.12.2",  # geometry-invariant assertions in smoke tests
 ]
 
 [tool.pytest.ini_options]
