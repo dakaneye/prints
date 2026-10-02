@@ -29,3 +29,6 @@ select = ["E", "F", "W", "I"]
 
 [tool.ruff.format]
 quote-style = "double"
+# Code blocks in docs are illustrative snippets and dated plan records, not
+# source; ruff >=0.16 formats Markdown fences, so keep it off them.
+exclude = ["*.md"]
