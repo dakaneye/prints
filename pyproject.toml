@@ -9,7 +9,7 @@ requires-python = ">=3.11,<3.14"
 # Also what you install locally if you want to run `pytest` from the repo root.
 dev = [
     "build123d>=0.13.0",
-    "pytest>=9.1.1",
+    "pytest>=9.2.0",
     "trimesh>=5.2.0",  # geometry-invariant assertions in smoke tests
     "networkx",  # trimesh optional dep: Path.discrete loop traversal in tests
 ]
